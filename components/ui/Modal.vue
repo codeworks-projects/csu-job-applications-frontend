@@ -121,7 +121,7 @@ export default defineNuxtComponent({
   }
 
   & .box {
-    @apply bg-white rounded-box overflow-hidden;
+    @apply bg-white overflow-hidden;
 
     width: 500px;
     height: 500px;

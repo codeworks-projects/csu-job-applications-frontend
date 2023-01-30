@@ -165,7 +165,7 @@ export default defineNuxtComponent({
     }
   }
 
-  &.not-valid {
+  /* &.not-valid {
     & input {
       @apply bg-light-red;
 
@@ -173,7 +173,7 @@ export default defineNuxtComponent({
         @apply bg-light-red-focus;
       }
     }
-  }
+  } */
 
   &.disabled {
     @apply pointer-events-none opacity-25;
