@@ -1,8 +1,8 @@
 import { createI18n } from "vue-i18n";
 
-const DEFAULT_LOCALE = "en";
+const DEFAULT_LOCALE = "it";
 const rawLangs = import.meta.glob("@/locales/*.json", { as: "raw" });
-import defaultTranslations from "@/locales/en.json";
+import defaultTranslations from "@/locales/it.json";
 
 const messages: any = {};
 messages[DEFAULT_LOCALE] = defaultTranslations;
