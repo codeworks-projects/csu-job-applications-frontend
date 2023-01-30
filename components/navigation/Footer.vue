@@ -46,14 +46,14 @@ footer {
     height: 300px;
 
     & .box-left{
-        @apply w-1/3 flex flex-col justify-center items-start;
+        @apply w-1/2 flex flex-col justify-center items-start;
 
         margin: 0 auto;
 
         & ul {
             & li {
                 @apply 
-                    even:w-3/4 
+                    even:w-2/3 
                     odd:w-1/2 odd:mb-2 odd:text-light-grey odd:opacity-50;
             }
         }
