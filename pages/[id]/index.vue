@@ -1,12 +1,12 @@
 <template>
     <div class="page">
-        <main>
-            {{ jobs.data[getCurrentId] }}
-            <div class="title">
-                <h1>Job Title</h1>
-            </div>
-            <JobInfo :is-single-job="true" />
-        </main>
+        <!-- INFO ON JOB -->
+
+        <JobInfo 
+            :job-data="getCurrentEl"
+        />
+
+        <!-- FORM -->
         <div class="form-ct">
             <div class="form-wrapper">
                 <div class="form-title">
@@ -73,9 +73,19 @@ export default defineNuxtComponent({
     },
 
     computed: {
-        getCurrentId() {
-            return this.$route.params.id
+        getCurrentEl() {
+            const slug = this.$route.params.id;
+            let element = {};
+
+            this.jobs.data.forEach(el => {
+                if (el.attributes.slug === slug) element = el;
+            });
+
+            return element;
         },
+        getBody() {
+            return this.jobs;
+        }
     }
 });
 </script>

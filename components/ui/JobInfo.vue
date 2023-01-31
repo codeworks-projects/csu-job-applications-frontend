@@ -1,35 +1,40 @@
 <template>
     <div class="section-ct">
+
+        {{ jobData }}
+
+        <div class="title text-9xl">
+            {{ jobData.attributes.title }}
+        </div>
         <!-- Job ID -->
         <div
-            v-if="isSingleJob === true"
             class="section-wrapper"
         >
             <div
                 class="section"
-                :class="isShowned.includes(4) ? 'active' : ''"
+                :class="isShowned.includes(i) ? 'active' : ''"
+                v-for="(info, i) in jobData.attributes.body"
+                :key="i"
             >
-                <h1>Dove</h1>
-                <!-- v-if="isShown includes id" -->
-                <p class="info-job">
+                <h1>
+                    {{ info }}
+                </h1>
+                <p 
+                    class="info-job"
+                    v-if="isShowned.includes(i)"
+                >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit.
                 </p>
                 <div
                     class="toggle"
-                    :class="isShowned.includes(4) ? 'active' : ''"
-                    @click="toggleShow(4)"
+                    :class="isShowned.includes(i) ? 'active' : ''"
+                    @click="toggleShow(i)"
                 >
                     <div class="sign">
-                        <span v-if="isShowned.includes(4)">&plus;</span>
+                        <span v-if="isShowned.includes(i)">&plus;</span>
                         <span v-else>&minus;</span>
                     </div>
                 </div>
-            </div>
-            <div class="section">
-                <h1>Quando</h1>
-                <p class="info-job">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit. Lorem ipsum dolor sit amet consectetur.
-                </p>
             </div>
         </div>
     </div>
@@ -45,26 +50,11 @@ export default defineNuxtComponent({
             type: Object,
             default: {}
         },
-        isSingleJob: {
-            type: Boolean,
-            default: false
-        },
     },
     data() {
         return {
-            // Se ci metto un array che si riempie e si svuota in base a cosa clicco allora ottengo l'apertura di tutte le cose che voglio per confronto diretto fra id cliccato e array riempito
-
-            isShowned: [0, 1, 2, 3],
+            isShowned: [],
         }
-    },
-    computed: {
-        // getBodyWithoutId(){
-        //     const body = [];
-        //     this.jobData.attributes.body.forEach((el, key) => {
-        //         if(key !== 'id') body.push(el);
-        //     });
-        //     return body;
-        // }
     },
     methods: {
         toggleShow(id)  {

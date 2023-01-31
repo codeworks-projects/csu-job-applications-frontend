@@ -6,8 +6,15 @@
     <main>
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper">
-        <div class="section" v-for="(job, i) in jobs.data" :key="i">
-          <h1>{{ job.attributes.title }}</h1>
+        <nuxt-link
+          class="section"
+          v-for="(job, i) in jobs.data"
+          :key="i"
+          :to="useRoute().path + job.attributes.slug"
+        >
+          <h1>
+            {{ job.attributes.title }}
+          </h1>
           <ul class="info-job">
             <li
               v-for="(info, key) in job.attributes.body"
@@ -17,7 +24,7 @@
               {{ info }}
             </li>
           </ul>
-        </div>
+        </nuxt-link>
       </div>
     </main>
   </div>
@@ -40,18 +47,6 @@ export default defineNuxtComponent({
       jobs: data
     }
   },
-
-  // computed: {
-  //   getBodyWithoutId() {
-  //     const bodyArray = [];
-
-  //     job.attributes.body.forEach((el, key) => {
-  //       if(key !== 'id') bodyArray.push(el);
-  //     });
-
-  //     return bodyArray;
-  //   }
-  // }
 });
 </script>
 
@@ -72,7 +67,7 @@ export default defineNuxtComponent({
 
     & .section-wrapper {
         & .section {
-            @apply relative w-full mt-6 pt-2 pb-4 border-t-2 border-t-primary text-grey;
+            @apply block relative w-full mt-6 pt-2 pb-4 border-t-2 border-t-primary text-grey;
                 
             & h1 {
                 @apply text-4xl pt-4 font-light;
@@ -95,7 +90,7 @@ export default defineNuxtComponent({
         }
         & .section:hover {
             & h1 {
-                @apply text-black;
+                @apply text-black cursor-pointer;
             }
         }
     }
