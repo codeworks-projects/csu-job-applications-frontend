@@ -6,11 +6,15 @@
     "pIva": "P.Iva",
     "actualIva": "01588430213",
     "contacts": "Contatti",
-    "openPositions": "Posizioni aperte"
+    "openPositions": "Posizioni aperte",
+    "privacyInfo": "Informativa sulla privacy",
+    "termsOfService": "Termini di servizio"
   },
   "jobs": {
-    "signTheModule": "Compila il modulo e ti contatteremo",
-    "asFastasWeCan": " il prima possibile!"
+    "signTheModule": "Compila il modulo e ti contatteremo il",
+    "asFastasWeCan": " prima possibile!",
+    "yourPersonalData": "Trattiamo i tuoi dati personali in conformità con la nostra",
+    "andOurs": "e ai nostri"
   },
   "footer": {
     "didYouNotFindThePositionYouWereLookingFor": "Non hai trovato la posizione che cercavi?",

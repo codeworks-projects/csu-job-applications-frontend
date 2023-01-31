@@ -73,8 +73,8 @@ export default defineNuxtComponent({
   @apply relative inline-block mt-3 px-3 text-base font-thin select-none;
 
   min-width: 50px;
-  /* height: 40px; */
-  /* line-height: 42px; */
+  height: 40px;
+  line-height: 42px;
 
   & > svg {
     @apply align-top mr-2;

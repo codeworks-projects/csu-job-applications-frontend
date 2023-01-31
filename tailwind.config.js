@@ -14,6 +14,7 @@ module.exports = {
       secondary: "#F5F5F5",
       "secondary-hover": "#F2F2F2",
       grey: "#b3b3b3",
+      "mid-grey": "#f4f4f4",
       "light-grey": "#FBFBFB",
       green: "#31b748",
       red: "#C74F4F",
