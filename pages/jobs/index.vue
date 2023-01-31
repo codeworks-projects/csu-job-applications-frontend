@@ -1,6 +1,7 @@
 <template>
     <div class="page">
         <main>
+            {{ jobs.data[getCurrentId] }}
             <div class="title">
                 <h1>Job Title</h1>
             </div>
@@ -56,7 +57,26 @@
 <script lang="ts">
 
 export default defineNuxtComponent({
+    data() {
+        return {
+            jobs: {},
+        }
+    },
 
+    async setup() {
+        const { public: configPublic } = useRuntimeConfig()
+        const { data } = await useFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+
+        return {
+            jobs: data
+        }
+    },
+
+    computed: {
+        getCurrentId() {
+            return this.$route.params.id
+        },
+    }
 });
 </script>
 

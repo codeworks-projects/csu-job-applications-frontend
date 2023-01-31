@@ -1,26 +1,5 @@
 <template>
     <div class="section-ct">
-        <!-- Pagina principale -->
-        <div
-            v-if="!isSingleJob"
-            class="section-wrapper"
-        >
-            <div class="section">
-                <h1>Job Title</h1>
-                <ul class="info-job">
-                    <li>Luogo</li>
-                    <li>Full-time</li>
-                </ul>
-            </div>
-                <div class="section">
-                <h1>Job Due</h1>
-                <ul class="info-job">
-                    <li>Luogo</li>
-                    <li>Tempo</li>
-                </ul>
-            </div>
-        </div>
-
         <!-- Job ID -->
         <div
             v-if="isSingleJob === true"
@@ -57,10 +36,12 @@
 </template>
 
 <script lang="ts">
+import { forEachChild } from 'typescript';
+
 
 export default defineNuxtComponent({
     props: {
-        job: {
+        jobData: {
             type: Object,
             default: {}
         },
@@ -75,6 +56,15 @@ export default defineNuxtComponent({
 
             isShowned: [0, 1, 2, 3],
         }
+    },
+    computed: {
+        // getBodyWithoutId(){
+        //     const body = [];
+        //     this.jobData.attributes.body.forEach((el, key) => {
+        //         if(key !== 'id') body.push(el);
+        //     });
+        //     return body;
+        // }
     },
     methods: {
         toggleShow(id)  {

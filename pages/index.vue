@@ -5,8 +5,20 @@
     </div>
     <main>
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
-      {{ jobs }}
-      <JobInfo />
+      <div class="section-wrapper">
+        <div class="section" v-for="(job, i) in jobs.data" :key="i">
+          <h1>{{ job.attributes.title }}</h1>
+          <ul class="info-job">
+            <li
+              v-for="(info, key) in job.attributes.body"
+              :key="'info' + key"
+              :class="key === 'id' ? 'hidden' : ''"
+            >
+              {{ info }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -20,26 +32,24 @@ export default defineNuxtComponent({
     }
   },
 
-  async setup(){
-    const {public:configPublic} = useRuntimeConfig()
-    const {data} = await useFetch(configPublic.apiBase+"/api/jobs/?populate=*")
+  async setup() {
+    const { public: configPublic } = useRuntimeConfig()
+    const { data } = await useFetch(configPublic.apiBase + "/api/jobs/?populate=*")
 
     return {
-      jobs:data
+      jobs: data
     }
+  },
 
-},
+  // computed: {
+  //   getBodyWithoutId() {
+  //     const bodyArray = [];
 
-  // async fetch(){
-  //   console.log(this.$getFetchUrl);
-    
-  //   try {
-  //     const res = await fetch("https://csu.codeworks.build/api/jobs/?populate=*")
-  //     .then(res=>res.json());
-  //     // console.log(res.data);
-  //     this.jobs = res?.data[0] || {}
-  //   } catch(error) {
-  //     // console.log(error);
+  //     job.attributes.body.forEach((el, key) => {
+  //       if(key !== 'id') bodyArray.push(el);
+  //     });
+
+  //     return bodyArray;
   //   }
   // }
 });
@@ -56,8 +66,38 @@ export default defineNuxtComponent({
   & main {
     @apply mt-28 p-4;
 
-    & .open-positions{
+    & .open-positions {
       @apply text-grey;
+    }
+
+    & .section-wrapper {
+        & .section {
+            @apply relative w-full mt-6 pt-2 pb-4 border-t-2 border-t-primary text-grey;
+                
+            & h1 {
+                @apply text-4xl pt-4 font-light;
+            }
+            & .info-job {
+                @apply mt-8 flex;
+
+                & li {
+                    @apply mx-1;
+
+                    &::after {
+                        content: ',';
+                    }
+
+                    &:last-of-type::after {
+                        content: '.';
+                    }   
+                }
+            }
+        }
+        & .section:hover {
+            & h1 {
+                @apply text-black;
+            }
+        }
     }
   }
 
