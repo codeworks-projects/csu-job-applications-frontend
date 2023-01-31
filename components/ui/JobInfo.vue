@@ -36,12 +36,13 @@
                 <p class="info-job">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit.
                 </p>
-                <div class="toggle">
-                    <div
-                        class="sign"
-                        @click="toggleShow()"
-                    >
-                        <span v-if="isShowned.includes(0)">&plus;</span>
+                <div
+                    class="toggle"
+                    :class="isShowned.includes(4) ? 'active' : ''"
+                    @click="toggleShow(4)"
+                >
+                    <div class="sign">
+                        <span v-if="isShowned.includes(4)">&plus;</span>
                         <span v-else>&minus;</span>
                     </div>
                 </div>
@@ -72,19 +73,18 @@ export default {
         return {
             // Se ci metto un array che si riempie e si svuota in base a cosa clicco allora ottengo l'apertura di tutte le cose che voglio per confronto diretto fra id cliccato e array riempito
 
-            isShowned: [],
+            isShowned: [0, 1, 2, 3],
         }
     },
-    computed: {
-
-    },
-    method: {
-        toggleShow(id){
+    methods: {
+        toggleShow(id)  {
             if (!this.isShowned.includes(id)){
                 this.isShowned.push(id)
+                // console.log(id);
             } else {
                 const index = this.isShowned.indexOf(id);
                 this.isShowned.splice(index, 1);
+                // console.log(id);
             }
         }
     }
@@ -117,16 +117,25 @@ export default {
                 }
             }
             & .toggle {
-                @apply flex justify-center items-center absolute right-0 top-1/2 border-2 border-primary h-10 w-10;
+                @apply flex justify-center items-center absolute right-0 top-1/2 border-4 border-grey h-10 w-10;
 
                 border-radius: 50%;
-
-                &:hover {
-                    @apply cursor-pointer;
+                & .sign {
+                    @apply text-grey text-xl font-semibold;
                 }
 
-                & .sign {
-                    @apply text-primary text-xl;
+                &:hover {
+                    @apply cursor-pointer border-primary;
+                    & .sign {
+                        @apply text-primary;
+                    }
+                }
+
+                &.active {
+                    @apply cursor-pointer border-primary;
+                    & .sign {
+                        @apply text-primary;
+                    }
                 }
             }
         }
