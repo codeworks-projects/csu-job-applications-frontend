@@ -101,7 +101,7 @@ export default defineNuxtComponent({
 
   &.fill {
     & textarea {
-      @apply w-full;
+      @apply w-full bg-white;
     }
   }
 

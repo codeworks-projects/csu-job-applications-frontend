@@ -134,7 +134,7 @@ export default defineNuxtComponent({
 
   &.fill {
     & input {
-      @apply w-full;
+      @apply w-full bg-white;
     }
   }
 

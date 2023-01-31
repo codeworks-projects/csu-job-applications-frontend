@@ -18,16 +18,16 @@ export default defineNuxtComponent({
     }
   },
 
-  // async fetch(){
-  //   try {
-  //     const res = await fetch ("https://csu.codeworks.build/api/jobs/?populate=*")
-  //     .then(res=>res.json());
-  //     console.log(res.data);
-  //     this.jobs = res?.data[0] || {}
-  //   } catch(error) {
-  //     console.log(error);
-  //   }
-  // }
+  async fetch(){
+    try {
+      const res = await fetch ("https://csu.codeworks.build/api/jobs/?populate=*")
+      .then(res=>res.json());
+      console.log(res.data);
+      this.jobs = res?.data[0] || {}
+    } catch(error) {
+      console.log(error);
+    }
+  }
 });
 </script>
 
