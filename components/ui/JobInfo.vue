@@ -26,12 +26,11 @@
             v-if="isSingleJob === true"
             class="section-wrapper"
         >
-            <div class="section"
-                :class="{
-                    'orange': isSingleJob,
-                }"
+            <div
+                class="section"
+                :class="isShowned.includes(4) ? 'active' : ''"
             >
-                <h1>Jobbone</h1>
+                <h1>Dove</h1>
                 <!-- v-if="isShown includes id" -->
                 <p class="info-job">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit.
@@ -48,7 +47,7 @@
                 </div>
             </div>
             <div class="section">
-                <h1>Job Due</h1>
+                <h1>Quando</h1>
                 <p class="info-job">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit. Lorem ipsum dolor sit amet consectetur.
                 </p>
@@ -57,8 +56,9 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+
+export default defineNuxtComponent({
     props: {
         job: {
             type: Object,
@@ -89,7 +89,7 @@ export default {
         }
     }
 
-}
+});
 </script>
 
 <style lang="postcss" scoped>
@@ -139,12 +139,12 @@ export default {
                 }
             }
         }
-        & .section:first-child {
+        & .section:hover {
             & h1 {
                 @apply text-black;
             }
         }
-        & .section.orange:first-child {
+        & .section.active {
             & h1 {
                 @apply text-primary;
             }

@@ -36,6 +36,9 @@ export default defineNuxtConfig({
     },
   },
 
+    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+
+
   components: [
     {
       path: "~/components/",
@@ -83,6 +86,12 @@ export default defineNuxtConfig({
         });
       });
     },
+  },
+
+  runtimeConfig:{
+    public:{
+      apiBase:''
+    }
   },
 
   telemetry: false,

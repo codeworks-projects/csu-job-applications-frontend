@@ -53,8 +53,11 @@
     </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+
+export default defineNuxtComponent({
+
+});
 </script>
 
 <style lang="postcss" scoped>

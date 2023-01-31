@@ -5,29 +5,43 @@
     </div>
     <main>
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
+      {{ jobs }}
       <JobInfo />
     </main>
   </div>
 </template>
 
 <script lang="ts">
+
 export default defineNuxtComponent({
   data() {
     return {
-      jobs: [],
+      jobs: {},
     }
   },
 
-  async fetch(){
-    try {
-      const res = await fetch ("https://csu.codeworks.build/api/jobs/?populate=*")
-      .then(res=>res.json());
-      console.log(res.data);
-      this.jobs = res?.data[0] || {}
-    } catch(error) {
-      console.log(error);
+  async setup(){
+    const {public:configPublic} = useRuntimeConfig()
+    const {data} = await useFetch(configPublic.apiBase+"/api/jobs/?populate=*")
+
+    return {
+      jobs:data
     }
-  }
+
+},
+
+  // async fetch(){
+  //   console.log(this.$getFetchUrl);
+    
+  //   try {
+  //     const res = await fetch("https://csu.codeworks.build/api/jobs/?populate=*")
+  //     .then(res=>res.json());
+  //     // console.log(res.data);
+  //     this.jobs = res?.data[0] || {}
+  //   } catch(error) {
+  //     // console.log(error);
+  //   }
+  // }
 });
 </script>
 
