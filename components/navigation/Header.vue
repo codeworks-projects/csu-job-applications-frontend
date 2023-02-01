@@ -1,8 +1,8 @@
 <template>
     <header>
-        <div class="image-ct">
+        <nuxt-link class="image-ct" :to="'/'">
             <img src="~public/image/csu-logo.png" alt="csu-logo">
-        </div>
+        </nuxt-link>
     </header>
 </template>
 
