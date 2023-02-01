@@ -1,9 +1,17 @@
 <template>
   <div class="page">
     <div class="banner">
-      <!--  -->
+      <div class="banner-text">
+        <h1>Die heißesten Winterjobs</h1>
+        <div
+          class="icon-ct"
+          @click="goTo('job-section')"
+        >
+          <Icon name="arrow-down"/>
+        </div>
+      </div>
     </div>
-    <main>
+    <main ref="job-section">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper">
         <nuxt-link
@@ -49,6 +57,18 @@ export default defineNuxtComponent({
       jobs: data
     }
   },
+
+  methods: {
+    goTo(refName) {
+      const element = this.$refs[refName];
+      const top = element.offsetTop;
+      window.scrollTo({
+        top: top,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
 });
 </script>
 
@@ -57,7 +77,31 @@ export default defineNuxtComponent({
   @apply text-base flex-col justify-center;
 
   & .banner {
-    @apply h-96 bg-black;
+    @apply bg-black h-screen;
+
+    & .banner-text {
+      @apply relative top-1/2 left-4 px-6 w-1/2;
+
+      & h1 {
+        @apply text-8xl font-light text-white;
+
+        line-height: 1.2;
+      }
+
+      & .icon-ct {
+        @apply mt-10 h-20 w-14 text-primary;
+
+        & svg {
+          @apply w-full h-full;
+
+          fill: currentColor;
+        }
+
+        &:hover {
+          @apply cursor-pointer;
+        }
+      }
+    }
   }
 
   & main {

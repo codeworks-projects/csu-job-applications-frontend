@@ -9,7 +9,7 @@
             <!-- Sections -->
             <div class="section" :class="isShowned.includes(i) ? 'active' : ''"
                 v-for="(info, i) in jobData.attributes.informations" :key="i">
-                <h1>{{ info.title }}</h1>
+                <h1 @click="toggleShow(i)">{{ info.title }}</h1>
                 <p class="info-job" v-if="isShowned.includes(i)">
                     {{ info.description }}
                 </p>
@@ -69,6 +69,10 @@ export default defineNuxtComponent({
 
             & h1 {
                 @apply text-4xl py-6 font-light;
+
+                &:hover {
+                    @apply cursor-pointer;
+                }
             }
 
             & .info-job {
