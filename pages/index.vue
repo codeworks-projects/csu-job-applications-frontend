@@ -11,6 +11,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Switch prova per linguaggio -->
+    <!-- <h1 class="text-9xl">{{ $t('hello', { name: 'vue-i18n' }) }}</h1>
+    <form>
+      <label for="locale-select">{{ $t('language') }}: </label>
+      <select id="locale-select" v-model="$i18n.locale">
+        <option value="it">it</option>
+        <option value="de">de</option>
+      </select>
+    </form> -->
+
     <main ref="job-section">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper">

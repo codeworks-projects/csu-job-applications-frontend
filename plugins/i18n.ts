@@ -3,6 +3,8 @@ import { createI18n } from "vue-i18n";
 const DEFAULT_LOCALE = "it";
 const rawLangs = import.meta.glob("@/locales/*.json", { as: "raw" });
 import defaultTranslations from "@/locales/it.json";
+import it from '../locales/it.json';
+import de from '../locales/de.json';
 
 const messages: any = {};
 messages[DEFAULT_LOCALE] = defaultTranslations;
@@ -13,6 +15,8 @@ export default defineNuxtPlugin(({ vueApp }) => {
     globalInjection: true,
     locale: DEFAULT_LOCALE,
     messages,
+    it,
+    de
   });
 
   vueApp.use(i18n);
