@@ -11,7 +11,7 @@
             <div class="form-wrapper">
                 <div class="form-title">
                     {{ $t('jobs.signTheModule') }}
-                    <strong>{{ $t('jobs.asFastasWeCan') }}</strong>
+                    <strong>{{ $t('jobs.asFastAsWeCan') }}</strong>
                 </div>
                 <div class="form">
                     <TextInput class="input" aspect="fill" placeholder="Nome" required />
@@ -96,10 +96,6 @@ export default defineNuxtComponent({
 
     & main {
         @apply mt-28 p-4;
-
-        & .title {
-            @apply mt-44 mb-28 text-6xl;
-        }
     }
 
     & .form-ct {

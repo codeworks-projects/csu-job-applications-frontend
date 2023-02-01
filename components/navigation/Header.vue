@@ -15,7 +15,7 @@ export default {
 <style lang="postcss" scoped>
 header {
     & .image-ct {
-        @apply fixed top-24 left-6;
+        @apply absolute top-24 left-6;
     }
 }
 </style>

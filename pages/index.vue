@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="banner">
-      QUESTO E' IL BANNER
+      <!--  -->
     </div>
     <main>
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
@@ -16,13 +16,15 @@
             {{ job.attributes.title }}
           </h1>
           <ul class="info-job">
-            <li
-              v-for="(info, key) in job.attributes.body"
+            <!-- <li
+              v-for="(info, key) in job.attributes.informations"
               :key="'info' + key"
               :class="key === 'id' ? 'hidden' : ''"
             >
-              {{ info }}
-            </li>
+              {{ info.title }}
+            </li> -->
+            <li>{{ job.attributes.place }}</li>
+            <li>{{ job.attributes.hours }}</li>
           </ul>
         </nuxt-link>
       </div>
@@ -55,7 +57,7 @@ export default defineNuxtComponent({
   @apply text-base flex-col justify-center;
 
   & .banner {
-    @apply min-h-screen bg-black;
+    @apply h-96 bg-black;
   }
 
   & main {

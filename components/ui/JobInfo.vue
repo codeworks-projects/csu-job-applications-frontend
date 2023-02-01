@@ -1,111 +1,92 @@
 <template>
     <div class="section-ct">
+        <div class="section-wrapper">
+            <!-- Title -->
+            <div class="title">
+                {{ jobData.attributes.title }}
+            </div>
 
-        {{ jobData }}
-
-        <div class="title text-9xl">
-            {{ jobData.attributes.title }}
-        </div>
-        <!-- Job ID -->
-        <div
-            class="section-wrapper"
-        >
-            <div
-                class="section"
-                :class="isShowned.includes(i) ? 'active' : ''"
-                v-for="(info, i) in jobData.attributes.body"
-                :key="i"
-            >
-                <h1>
-                    {{ info }}
-                </h1>
-                <p 
-                    class="info-job"
-                    v-if="isShowned.includes(i)"
-                >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, suscipit.
+            <!-- Sections -->
+            <div class="section" :class="isShowned.includes(i) ? 'active' : ''"
+                v-for="(info, i) in jobData.attributes.informations" :key="i">
+                <h1>{{ info.title }}</h1>
+                <p class="info-job" v-if="isShowned.includes(i)">
+                    {{ info.description }}
                 </p>
-                <div
-                    class="toggle"
-                    :class="isShowned.includes(i) ? 'active' : ''"
-                    @click="toggleShow(i)"
-                >
+
+                <!-- Toggle -->
+                <div class="toggle" :class="isShowned.includes(i) ? 'active' : ''" @click="toggleShow(i)">
                     <div class="sign">
-                        <span v-if="isShowned.includes(i)">&plus;</span>
-                        <span v-else>&minus;</span>
+                        <span v-if="isShowned.includes(i)">&minus;</span>
+                        <span v-else>&plus;</span>
                     </div>
                 </div>
             </div>
+
+            <!-- Divisore -->
+            <div class="section"></div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { forEachChild } from 'typescript';
-
-
 export default defineNuxtComponent({
     props: {
         jobData: {
             type: Object,
-            default: {}
+            default: {},
         },
     },
     data() {
         return {
             isShowned: [],
-        }
+        };
     },
     methods: {
-        toggleShow(id)  {
-            if (!this.isShowned.includes(id)){
-                this.isShowned.push(id)
-                // console.log(id);
+        toggleShow(id) {
+            if (!this.isShowned.includes(id)) {
+                this.isShowned.push(id);
             } else {
                 const index = this.isShowned.indexOf(id);
                 this.isShowned.splice(index, 1);
-                // console.log(id);
             }
-        }
-    }
-
+        },
+    },
 });
 </script>
 
 <style lang="postcss" scoped>
 .section-ct {
+    & .title {
+        @apply mt-72 mb-28 text-6xl;
+    }
+
     & .section-wrapper {
+        @apply mb-6 px-10;
+
         & .section {
-            @apply relative w-full mt-6 pt-2 pb-4 border-t-2 border-t-primary text-grey;
-                
+            @apply relative w-full mt-6 border-t-2 border-t-primary text-grey;
+
             & h1 {
-                @apply text-4xl pt-4 font-light;
+                @apply text-4xl py-6 font-light;
             }
+
             & .info-job {
-                @apply mt-8 flex;
-
-                & li {
-                    @apply mx-1;
-
-                    &::after {
-                        content: ',';
-                    }
-
-                    &:last-of-type::after {
-                        content: '.';
-                    }   
-                }
+                @apply mt-2 flex;
             }
+
             & .toggle {
-                @apply flex justify-center items-center absolute right-0 top-1/2 border-4 border-grey h-10 w-10;
+                @apply flex justify-center items-center absolute right-0 top-6 border-4 border-grey h-10 w-10;
 
                 border-radius: 50%;
+
                 & .sign {
                     @apply text-grey text-xl font-semibold;
                 }
 
                 &:hover {
                     @apply cursor-pointer border-primary;
+
                     & .sign {
                         @apply text-primary;
                     }
@@ -113,20 +94,26 @@ export default defineNuxtComponent({
 
                 &.active {
                     @apply cursor-pointer border-primary;
+
                     & .sign {
                         @apply text-primary;
                     }
                 }
             }
         }
+
         & .section:hover {
             & h1 {
                 @apply text-black;
             }
         }
+
         & .section.active {
             & h1 {
                 @apply text-primary;
+            }
+            & .info-job {
+                @apply text-black;
             }
         }
     }
