@@ -77,15 +77,12 @@ export default defineNuxtComponent({
             const slug = this.$route.params.id;
             let element = {};
 
-            this.jobs.data.forEach(el => {
+            this.jobs?.data?.forEach(el => {
                 if (el.attributes.slug === slug) element = el;
             });
 
             return element;
         },
-        getBody() {
-            return this.jobs;
-        }
     }
 });
 </script>

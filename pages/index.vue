@@ -16,7 +16,7 @@
       <div class="section-wrapper">
         <nuxt-link
           class="section"
-          v-for="(job, i) in jobs.data"
+          v-for="(job, i) in getJobs"
           :key="i"
           :to="useRoute().path + job.attributes.slug"
         >
@@ -55,6 +55,12 @@ export default defineNuxtComponent({
 
     return {
       jobs: data
+    }
+  },
+
+  computed: {
+    getJobs() {
+      return this.jobs?.data
     }
   },
 
