@@ -105,7 +105,7 @@ export default defineNuxtComponent({
   }
 
   & main {
-    @apply mt-28 p-4;
+    @apply my-28 p-4;
 
     & .open-positions {
       @apply text-grey;
@@ -113,7 +113,7 @@ export default defineNuxtComponent({
 
     & .section-wrapper {
         & .section {
-            @apply block relative w-full mt-6 pt-2 pb-4 border-t-2 border-t-primary text-grey;
+            @apply block relative w-full mt-6 pt-2 pb-4 border-t-4 border-t-primary text-grey;
                 
             & h1 {
                 @apply text-4xl pt-4 font-light;

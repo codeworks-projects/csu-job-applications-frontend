@@ -62,10 +62,10 @@ export default defineNuxtComponent({
     }
 
     & .section-wrapper {
-        @apply mb-6 px-10;
+        @apply mb-28 px-10;
 
         & .section {
-            @apply relative w-full mt-6 border-t-2 border-t-primary text-grey;
+            @apply relative w-full mt-6 border-t-4 border-t-primary text-grey;
 
             & h1 {
                 @apply text-4xl py-6 font-light;
