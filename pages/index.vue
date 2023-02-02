@@ -24,7 +24,7 @@
 
     <main ref="job-section">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
-      <div class="section-wrapper">
+      <div class="section-wrapper" >
         <nuxt-link
           class="section"
           v-for="(job, i) in getJobs"
@@ -35,17 +35,19 @@
             {{ job.attributes.title }}
           </h1>
           <ul class="info-job">
-            <!-- <li
-              v-for="(info, key) in job.attributes.informations"
-              :key="'info' + key"
-              :class="key === 'id' ? 'hidden' : ''"
-            >
-              {{ info.title }}
-            </li> -->
             <li>{{ job.attributes.place }}</li>
             <li>{{ job.attributes.hours }}</li>
           </ul>
         </nuxt-link>
+      </div>
+
+      <div 
+        v-if="!getJobs"
+        class="section-wrapper.placeholder"
+      >
+        <div class="section"></div>
+        <div class="section"></div>
+        <div class="section"></div>
       </div>
     </main>
   </div>
@@ -156,6 +158,12 @@ export default defineNuxtComponent({
                 @apply text-black cursor-pointer;
             }
         }
+    }
+
+    & .section-wrapper.placeholder {
+      & .section {
+        @apply h-32 bg-placeholder;
+      }
     }
   }
 
