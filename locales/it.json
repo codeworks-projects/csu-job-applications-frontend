@@ -2,7 +2,8 @@
   "hello": "Ciao, {name}!",
   "language": "Lingua",
   "common": {
-    "csuEmail": "info@csu-online.it",
+    "info": "info",
+    "csuEmail": "csu-online.it",
     "csuAddress": "Via E. Ferrari, 5 39100 Bolzano",
     "csuTelephone": "+39 0471 324239",
     "pIva": "P.Iva",

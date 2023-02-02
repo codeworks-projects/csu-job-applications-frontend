@@ -7,7 +7,7 @@
             </ul>
             <a href="mailto:info@csu-online.it" class="btn-ct">
                 <Button
-                    :value="$t('common.csuEmail')"
+                    :value="$t('common.info')+'@'+$t('common.csuEmail')"
                     type="secondary"
                 />
             </a>
