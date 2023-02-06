@@ -189,4 +189,24 @@ export default defineNuxtComponent({
     }
   }
 }
+
+@media only screen and (max-width:980px) {
+  .page {
+    & .form-ct {
+      & .form-wrapper {
+        @apply w-2/3;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:500px) {
+  .page {
+    & .form-ct {
+      & .form-wrapper {
+        @apply w-full;
+      }
+    }
+  }
+}
 </style>

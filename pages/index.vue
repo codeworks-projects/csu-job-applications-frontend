@@ -168,4 +168,30 @@ export default defineNuxtComponent({
   }
 
 }
+
+@media only screen and (max-width:980px) {
+  .page {
+    & .banner {
+      & .banner-text {
+        & h1 {
+          @apply text-6xl;
+        }
+
+        & .icon-ct {
+          @apply mt-10 h-20 w-14 text-primary;
+
+          & svg {
+            @apply w-full h-full;
+
+            fill: currentColor;
+          }
+
+          &:hover {
+            @apply cursor-pointer;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

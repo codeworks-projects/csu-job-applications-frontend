@@ -57,13 +57,12 @@ export default defineNuxtComponent({
 
 <style lang="postcss" scoped>
 .section-ct {
-    & .title {
-        @apply mt-72 mb-28 text-6xl;
-    }
-
     & .section-wrapper {
         @apply mb-28 px-10;
 
+        & .title {
+            @apply mt-72 mb-28 text-6xl;
+        }
         & .section {
             @apply relative w-full mt-6 border-t-4 border-t-primary text-grey;
 
@@ -118,6 +117,16 @@ export default defineNuxtComponent({
             }
             & .info-job {
                 @apply text-black;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:980px) {
+    .section-ct {
+        & .section-wrapper {
+            & .title {
+                @apply text-4xl;
             }
         }
     }

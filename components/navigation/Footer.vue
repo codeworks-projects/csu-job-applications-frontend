@@ -43,7 +43,7 @@ export default {
 footer {
     @apply bg-primary grid grid-cols-2 text-sm text-white;
 
-    height: 300px;
+    min-height: 300px;
 
     & .box-left{
         @apply w-1/2 flex flex-col justify-center items-start;
@@ -73,6 +73,31 @@ footer {
             & li {
                 @apply odd:mt-4 odd:text-light-grey odd:uppercase odd:opacity-50;
             }
+        }
+    }
+}
+
+@media only screen and (max-width:980px) {
+    footer {
+        @apply p-2;
+        & .box-left{
+            @apply w-3/4;
+        }
+        & .box-right{
+            & .coop-ct {
+                @apply pr-4;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:500px) {
+    footer {
+        & .box-left{
+            @apply w-full;
+        }
+        & .box-right{
+            @apply items-start;
         }
     }
 }
