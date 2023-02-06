@@ -44,14 +44,15 @@
               placeholder="Data"
               required
             />
-            <TextInput
+          </div>
+
+          <TextInput
               type="text"
               class="input col-span-2"
               aspect="fill"
               placeholder="Professione"
               required
             />
-          </div>
 
           <TextArea
             type="text"
