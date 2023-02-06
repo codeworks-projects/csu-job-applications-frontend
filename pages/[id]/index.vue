@@ -12,16 +12,21 @@
           <strong>{{ $t("jobs.asFastAsWeCan") }}</strong>
         </div>
         <div class="form">
+
+          <!-- <input v-model="validName" /> -->
           <TextInput
-            v-model:value="validations.name"
+            v-model="validations.name"
+            :valid="isNameValid"
             type="text"
             class="input"
             aspect="fill"
             placeholder="Nome*"
             required
           />
+          <p class="h-10 bg-black text-white">{{ validations.name }}</p>
+
           <TextInput
-            v-model="validations.surname"
+            v-model="validSurname"
             type="text"
             class="input"
             aspect="fill"
@@ -95,7 +100,7 @@ export default defineNuxtComponent({
 
       // VALIDATIONS
       validations: {
-        name: '',
+        name: "",
         surname: "",
       },
     };
@@ -107,7 +112,7 @@ export default defineNuxtComponent({
 
     return {
       jobs: data,
-      pending
+      pending,
     }
   },
 
@@ -124,18 +129,17 @@ export default defineNuxtComponent({
     },
 
     // VALIDATIONS
-
-    // isNameValid() {
-    //     return (
-    //         this.name.length > 2 ||
-    //         this.name === ''
-    //     )
-    // }
+    isNameValid() {
+        return (
+            this.validations.name.length > 2 ||
+            this.validations.name === ''
+        )
+    }
   },
 
   methods: {
     getLog() {
-      console.log(this.validations.name, this.validations.surname);
+      console.log(this.validations);
     },
   },
 });

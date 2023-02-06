@@ -8,7 +8,7 @@
     }"
   >
     <InputLabel v-if="label" :text="label" :required="required" />
-    <input
+    <!-- <input
       ref="input"
       :type="type"
       :placeholder="placeholder"
@@ -19,12 +19,25 @@
       @keypress="keypress($event)"
       @input="updateValue(($event.target as HTMLInputElement).value)"
       @blur="onBlur(($event.target as HTMLInputElement).value)"
-    />
+      /> -->
+      <input
+        ref="input"
+        :type="type"
+        :placeholder="placeholder"
+        :name="name"
+        v-model="inputModel"
+        :required="required"
+        :disabled="disabled"
+        @keypress="keypress($event)"
+        @input="updateValue(($event.target as HTMLInputElement).value)"
+        @blur="onBlur(($event.target as HTMLInputElement).value)"
+      />
     <InputDescription v-if="description" :text="description" />
   </div>
 </template>
 
 <script lang="ts">
+import {computed} from "@vue/runtime-core";
 export default defineNuxtComponent({
   props: {
     label: {
@@ -83,6 +96,21 @@ export default defineNuxtComponent({
       type: Boolean,
       default: true,
     },
+    modelValue: String,
+  },
+
+  setup(props,{emit}) {
+    const inputModel = computed({
+      get(){
+        return props.modelValue
+      },
+      set(newValue){
+        emit('update:modelValue', newValue)
+      }
+    })
+    return {
+      inputModel,
+    }
   },
 
   methods: {
@@ -140,7 +168,7 @@ export default defineNuxtComponent({
 
   &.not-valid {
     & input {
-      @apply bg-red;
+      @apply bg-light-red;
     }
   }
 

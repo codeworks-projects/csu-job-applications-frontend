@@ -18,6 +18,7 @@ module.exports = {
       "light-grey": "#FBFBFB",
       green: "#31b748",
       red: "#C74F4F",
+      "light-red": "#fff1f1" ,
       placeholder: "#EEEEEE",
       input: "#F5F5F5",
       "input-focus": "#F3F3F3",
