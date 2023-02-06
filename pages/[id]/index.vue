@@ -96,8 +96,11 @@
             />
           </div>
           <div class="checkbox-ct">
-            <Checkbox 
+            <Checkbox
+              v-model="authorization"
+              :checked="authorization"
               required
+              @click="getLog()"
             />
             <p class="checkbox-info">
               {{ $t("jobs.yourPersonalData") }}
@@ -188,7 +191,11 @@ export default defineNuxtComponent({
 
   methods: {
     getLog() {
-      console.log(this.validations);
+      console.log(this.validations, this.authorization);
+    },
+
+    authorize() {
+      this.authorization = !this.authorization;
     },
 
     // somethingWrong() {

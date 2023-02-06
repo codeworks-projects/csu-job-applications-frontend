@@ -13,7 +13,7 @@
       <div class="input">
         <input
           ref="input"
-          v-model="selected"
+          v-model="inputModel"
           :value="value"
           type="checkbox"
           :disabled="disabled"
@@ -29,6 +29,7 @@
 </template>
 
 <script lang="ts">
+import {computed} from "@vue/runtime-core";
 export default defineNuxtComponent({
   model: {
     prop: "checked",
@@ -63,10 +64,21 @@ export default defineNuxtComponent({
         return (["checkbox", "switch-on"] as String[]).includes(value);
       },
     },
+    modelValue: Boolean,
   },
 
-  setup() {
+  setup(props, {emit}) {
+    const inputModel = computed({
+      get(){
+        return props.modelValue
+      },
+      set(newValue){
+        emit('update:modelValue', newValue)
+      }
+    })
+
     return {
+      inputModel,
       isChecked: false,
     };
   },
