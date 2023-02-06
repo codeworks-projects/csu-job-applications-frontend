@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="banner">
-      <div class="banner-text">
+      <div class="banner-text container center">
         <h1>Die heißesten Winterjobs</h1>
         <div
           class="icon-ct"
@@ -22,7 +22,7 @@
       </select>
     </form> -->
 
-    <main ref="job-section">
+    <main ref="job-section" class="container center">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper" >
         <nuxt-link
@@ -99,7 +99,7 @@ export default defineNuxtComponent({
     @apply bg-black h-screen;
 
     & .banner-text {
-      @apply relative top-1/2 left-4 px-6 w-1/2;
+      @apply relative top-1/2 left-0;
 
       & h1 {
         @apply text-8xl font-light text-white;
@@ -124,7 +124,7 @@ export default defineNuxtComponent({
   }
 
   & main {
-    @apply my-28 p-4;
+    @apply my-28;
 
     & .open-positions {
       @apply text-grey;

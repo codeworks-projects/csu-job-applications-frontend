@@ -1,8 +1,10 @@
 <template>
     <header>
-        <NuxtLink class="image-ct" :to="'/'">
-            <img src="~public/image/csu-logo.png" alt="csu-logo">
-        </NuxtLink>
+        <div class="container center">
+            <NuxtLink class="image-ct" :to="'/'">
+                <img src="~public/image/csu-logo.png" alt="csu-logo">
+            </NuxtLink>
+        </div>
     </header>
 </template>
 
@@ -14,8 +16,10 @@ export default {
 
 <style lang="postcss" scoped>
 header {
-    & .image-ct {
-        @apply absolute top-24 left-6;
+    & .container {
+        & .image-ct {
+            @apply absolute top-24 left-6;
+        }
     }
 }
 </style>

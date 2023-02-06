@@ -1,5 +1,5 @@
 <template>
-    <div class="section-ct">
+    <div class="section-ct container center">
         <div class="section-wrapper">
             <!-- Title -->
             <div class="title">
@@ -58,11 +58,12 @@ export default defineNuxtComponent({
 <style lang="postcss" scoped>
 .section-ct {
     & .section-wrapper {
-        @apply mb-28 px-10;
+        @apply mb-28;
 
         & .title {
             @apply mt-72 mb-28 text-6xl;
         }
+
         & .section {
             @apply relative w-full mt-6 border-t-4 border-t-primary text-grey;
 
@@ -104,13 +105,11 @@ export default defineNuxtComponent({
                 }
             }
         }
-
         & .section:hover {
             & h1 {
                 @apply text-black;
             }
         }
-
         & .section.active {
             & h1 {
                 @apply text-primary;
@@ -128,6 +127,13 @@ export default defineNuxtComponent({
             & .title {
                 @apply text-4xl;
             }
+
+            & .section {
+                & h1 {
+                    @apply text-3xl;
+                }
+            }
+
         }
     }
 }

@@ -6,7 +6,7 @@
 
     <!-- FORM -->
     <form class="form-ct">
-      <div class="form-wrapper">
+      <div class="form-wrapper center">
         <div class="form-title">
           {{ $t("jobs.signTheModule") }}
           <strong>{{ $t("jobs.asFastAsWeCan") }}</strong>
