@@ -80,18 +80,25 @@
             placeholder="Messaggio"
           />
 
-          <div class="link">
-            <a href="#"> Link al curriculum? </a>
-          </div>
+          <!-- <div class="link">
+            <a href="#"> Link al curriculum </a>
+          </div> -->
+
+          <p v-if="errorInForm === true" class="form-error"> Qualcosa è andato storto, riprova </p>
+          <p v-if="errorInForm === false" class="form-success"> Abbiamo ricevuto la tua candidatura, grazie! </p>
 
           <div class="btn-ct">
             <Button 
-              value="Apply" 
+              value="Apply"
+              icon="arrow-up-right"
+              type="primary"
               @click="getLog(), finalCheck()"
             />
           </div>
           <div class="checkbox-ct">
-            <Checkbox required />
+            <Checkbox 
+              required
+            />
             <p class="checkbox-info">
               {{ $t("jobs.yourPersonalData") }}
               <a href="">
@@ -115,6 +122,8 @@ export default defineNuxtComponent({
     return {
       jobs: {},
 
+      errorInForm: undefined,
+
       // VALIDATIONS
       validations: {
         name: "",
@@ -124,6 +133,7 @@ export default defineNuxtComponent({
         profession: "",
         message: "",
       },
+      authorization: false,
     };
   },
 
@@ -181,21 +191,34 @@ export default defineNuxtComponent({
       console.log(this.validations);
     },
 
+    // somethingWrong() {
+    //   this.errorInForm = true;
+    //   console.log(this.errorInForm);
+      
+
+    //   setTimeout(() => this.errorInForm = false, 1000);
+    // },
+
     finalCheck() {
       if (
         !this.validations?.name ||
         !this.validations?.surname ||
         !this.validations?.email ||
         !this.validations?.date ||
+        !this.authorization ||
 
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
         !this.isProfessionValid
       ){
-        this.notifyError('error')
+        // this.somethingWrong();
+        console.log('error');
+        this.errorInForm = true;
+        
       }else{
-        this.getLog();
+        console.log('success')
+        this.errorInForm = false;
       }
     }
   },
@@ -225,6 +248,13 @@ export default defineNuxtComponent({
           @apply mt-2 w-full bg-white border-grey;
 
           border: 1px solid rgb(179 179 179);
+        }
+
+        & .form-error {
+          @apply mt-2 p-2 w-full bg-red text-center;
+        }
+        & .form-success {
+          @apply mt-2 p-2 w-full bg-green text-center;
         }
 
         & .link {

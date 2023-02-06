@@ -11,8 +11,8 @@
       'fill-width': aspect === 'fill',
     }"
   >
-    <icon v-if="icon !== ''" :name="icon" :type="iconType" />
     {{ value }}
+    <icon v-if="icon !== ''" :name="icon" :type="iconType" />
     <Loader
       v-if="loading"
       class="loader-ct"
@@ -77,12 +77,11 @@ export default defineNuxtComponent({
   line-height: 42px;
 
   & > svg {
-    @apply align-top mr-2;
+    @apply align-middle mr-2;
 
     width: 18px;
     height: 18px;
-    margin-top: 16px;
-    fill: theme(colors.white);
+    fill: theme(colors.secondary);
   }
 
   & > .loader-ct {
@@ -106,7 +105,7 @@ export default defineNuxtComponent({
     }
 
     & > svg {
-      fill: theme(colors.black);
+      fill: theme(colors.primary);
     }
   }
 

@@ -10,6 +10,7 @@
                     <Button
                         :value="$t('common.info')+'@'+$t('common.csuEmail')"
                         type="secondary"
+                        icon="arrow-up-right"
                     />
                 </a>
             </div>
