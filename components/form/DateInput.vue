@@ -11,7 +11,7 @@
     <div>
       <input
         ref="input"
-        v-model="date"
+        v-model="inputModel"
         type="date"
         placeholder="YYYY-MM-DD"
         :required="required"
@@ -71,13 +71,28 @@ export default defineNuxtComponent({
       type: String,
       default: "01-01-1970",
     },
+    modelValue: String,
   },
 
-  setup() {
+  // setup() {
+  //   return {
+  //     date: "",
+  //     time: "",
+  //   };
+  // },
+
+  setup(props,{emit}) {
+    const inputModel = computed({
+      get(){
+        return props.modelValue
+      },
+      set(newValue){
+        emit('update:modelValue', newValue)
+      }
+    })
     return {
-      date: "",
-      time: "",
-    };
+      inputModel,
+    }
   },
 
   created() {

@@ -13,7 +13,6 @@
         </div>
         <div class="form">
 
-          <!-- <input v-model="validName" /> -->
           <TextInput
             v-model="validations.name"
             :valid="isNameValid"
@@ -23,10 +22,10 @@
             placeholder="Nome*"
             required
           />
-          <p class="h-10 bg-black text-white">{{ validations.name }}</p>
 
           <TextInput
-            v-model="validSurname"
+            v-model="validations.surname"
+            :valid="isSurnameValid"
             type="text"
             class="input"
             aspect="fill"
@@ -36,22 +35,36 @@
 
           <div class="grid grid-cols-3 gap-x-2">
             <TextInput
+              v-model="validations.email"
+              :valid="isEmailValid"
               type="email"
               class="input col-span-2"
               aspect="fill"
               placeholder="Email*"
               required
             />
-            <TextInput
+            <DateInput
+              v-model="validations.date"
               type="data"
               class="input"
               aspect="fill"
               placeholder="Data"
               required
             />
+            <!-- <TextInput
+              v-model="validations.date"
+              :valid="isDateValid"
+              type="data"
+              class="input"
+              aspect="fill"
+              placeholder="Data"
+              required
+            /> -->
           </div>
 
           <TextInput
+            v-model="validations.profession"
+            :valid="isProfessionValid"
               type="text"
               class="input col-span-2"
               aspect="fill"
@@ -60,6 +73,7 @@
             />
 
           <TextArea
+            v-model="validations.message"
             type="text"
             class="input"
             aspect="fill"
@@ -71,7 +85,10 @@
           </div>
 
           <div class="btn-ct">
-            <Button value="Apply" @click="getLog()" />
+            <Button 
+              value="Apply" 
+              @click="getLog(), finalCheck()"
+            />
           </div>
           <div class="checkbox-ct">
             <Checkbox required />
@@ -102,6 +119,10 @@ export default defineNuxtComponent({
       validations: {
         name: "",
         surname: "",
+        email: "",
+        date: "",
+        profession: "",
+        message: "",
       },
     };
   },
@@ -134,13 +155,49 @@ export default defineNuxtComponent({
             this.validations.name.length > 2 ||
             this.validations.name === ''
         )
-    }
+    },
+    isSurnameValid() {
+        return (
+            this.validations.surname.length > 2 ||
+            this.validations.surname === ''
+        )
+    },
+    isEmailValid() {
+      return (
+        (this.validations.email.length > 0 && this.validations.email.match(/^[^@]+@[^@]+\.[^@]+$/)) ||
+        this.validations.email.length === 0
+      )
+    },
+    isProfessionValid() {
+        return (
+            this.validations.profession.length > 2 ||
+            this.validations.profession === ''
+        )
+    },
   },
 
   methods: {
     getLog() {
       console.log(this.validations);
     },
+
+    finalCheck() {
+      if (
+        !this.validations?.name ||
+        !this.validations?.surname ||
+        !this.validations?.email ||
+        !this.validations?.date ||
+
+        !this.isNameValid ||
+        !this.isSurnameValid ||
+        !this.isEmailValid ||
+        !this.isProfessionValid
+      ){
+        this.notifyError('error')
+      }else{
+        this.getLog();
+      }
+    }
   },
 });
 </script>
