@@ -1,4 +1,5 @@
 {
+  "name": "csu-job-applications-frontend",
   "private": true,
   "scripts": {
     "build": "nuxt build",
