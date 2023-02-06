@@ -25,8 +25,12 @@
     <main ref="job-section" class="container center">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper" >
+        <div v-if="pending">
+          Loading...
+        </div>
         <nuxt-link
           class="section"
+          v-else
           v-for="(job, i) in getJobs"
           :key="i"
           :to="useRoute().path + job.attributes.slug"
@@ -64,10 +68,11 @@ export default defineNuxtComponent({
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig()
-    const { data } = await useFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+    const { pending, data } = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
 
     return {
-      jobs: data
+      jobs: data,
+      pending
     }
   },
 

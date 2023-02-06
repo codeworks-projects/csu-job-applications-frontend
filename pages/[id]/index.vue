@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <!-- INFO ON JOB -->
-
-    <JobInfo :job-data="getCurrentEl" />
+    <div v-if="pending">Loading...</div>
+    <JobInfo v-else :job-data="getCurrentEl" />
 
     <!-- FORM -->
     <form class="form-ct">
@@ -102,14 +102,13 @@ export default defineNuxtComponent({
   },
 
   async setup() {
-    const { public: configPublic } = useRuntimeConfig();
-    const { data } = await useFetch(
-      configPublic.apiBase + "/api/jobs/?populate=*"
-    );
+    const { public: configPublic } = useRuntimeConfig()
+    const { pending, data } = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
 
     return {
       jobs: data,
-    };
+      pending
+    }
   },
 
   computed: {

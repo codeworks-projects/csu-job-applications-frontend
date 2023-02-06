@@ -3,12 +3,12 @@
         <div class="section-wrapper">
             <!-- Title -->
             <div class="title">
-                {{ jobData.attributes.title }}
+                {{ getTitle }}
             </div>
 
             <!-- Sections -->
             <div class="section" :class="isShowned.includes(i) ? 'active' : ''"
-                v-for="(info, i) in jobData.attributes.informations" :key="i">
+                v-for="(info, i) in getInformations" :key="i">
                 <h1 @click="toggleShow(i)">{{ info.title }}</h1>
                 <p class="info-job" v-if="isShowned.includes(i)">
                     {{ info.description }}
@@ -50,6 +50,14 @@ export default defineNuxtComponent({
                 const index = this.isShowned.indexOf(id);
                 this.isShowned.splice(index, 1);
             }
+        },
+    },
+    computed: {
+        getTitle() {
+            return this.jobData?.attributes?.title;
+        },
+        getInformations() {
+            return this.jobData?.attributes?.informations;
         },
     },
 });
