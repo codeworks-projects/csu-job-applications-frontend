@@ -34,3 +34,9 @@ svg {
   width: 970px;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 980px) {
+  .center {
+    @apply w-auto mx-5;
+  }
+}
