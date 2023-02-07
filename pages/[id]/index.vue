@@ -84,8 +84,8 @@
             <a href="#"> Link al curriculum </a>
           </div> -->
 
-          <p v-if="errorInForm === true" class="form-error"> Qualcosa è andato storto, riprova </p>
-          <p v-if="errorInForm === false" class="form-success"> Abbiamo ricevuto la tua candidatura, grazie! </p>
+          <!-- <p v-if="errorInForm === true" class="form-error"> Qualcosa è andato storto, riprova </p>
+          <p v-if="errorInForm === false" class="form-success"> Abbiamo ricevuto la tua candidatura, grazie! </p> -->
 
           <div class="btn-ct">
             <Button 
@@ -98,7 +98,7 @@
           <div class="checkbox-ct">
             <Checkbox
               v-model="authorization"
-              :checked="authorization"
+              :checked="authorization === true"
               required
               @click="getLog()"
             />
@@ -116,6 +116,22 @@
         </div>
       </div>
     </form>
+
+    <Modal 
+      :is-visible="errorInForm === true"
+      title="Si è verificato un errore"
+      @close="errorReset()"
+    >
+      <p>Ricorda che Nome, Cognome, Email, Data e i Termini di servizio sono tutti campi obbligatori</p>
+    </Modal>
+
+    <Modal
+      :is-visible="errorInForm === false"
+      title="Tutto è andato a buon fine"
+      @close="errorReset()"
+    >
+      <p>Abbiamo ricevuto la tua candidatura, grazie!</p>
+    </Modal>
   </div>
 </template>
 
@@ -125,7 +141,7 @@ export default defineNuxtComponent({
     return {
       jobs: {},
 
-      errorInForm: undefined,
+      errorInForm: null,
 
       // VALIDATIONS
       validations: {
@@ -227,6 +243,10 @@ export default defineNuxtComponent({
         console.log('success')
         this.errorInForm = false;
       }
+    },
+
+    errorReset() {
+      this.errorInForm = null;
     }
   },
 });
