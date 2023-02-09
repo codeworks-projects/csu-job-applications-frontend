@@ -47,11 +47,21 @@
 
       <div 
         v-if="!getJobs"
-        class="section-wrapper.placeholder"
+        class="section-wrapper placeholder"
       >
-        <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
+            <!-- Sections -->
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
       </div>
     </main>
   </div>
@@ -165,9 +175,18 @@ export default defineNuxtComponent({
         }
     }
 
-    & .section-wrapper.placeholder {
+    & .placeholder {
+      & .title {
+          @apply h-20 bg-placeholder;
+      }
       & .section {
-        @apply h-32 bg-placeholder;
+          @apply border-t-primary;
+          & h1 {
+              @apply h-10 mt-2 bg-placeholder;
+          }
+          & p {
+              @apply h-5 mt-7 w-2/3 bg-placeholder;
+          }
       }
     }
   }
