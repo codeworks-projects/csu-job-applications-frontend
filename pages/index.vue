@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="banner">
+    <div class="banner" :style="{ backgroundImage: 'url(' + getBanner + ')' }">
       <div class="banner-text container center">
         <h1>Die heißesten Winterjobs</h1>
         <div
@@ -9,6 +9,7 @@
         >
           <Icon name="arrow-down"/>
         </div>
+
       </div>
     </div>
 
@@ -25,12 +26,8 @@
     <main ref="job-section" class="container center">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper" >
-        <div v-if="pending">
-          Loading...
-        </div>
         <nuxt-link
           class="section"
-          v-else
           v-for="(job, i) in getJobs"
           :key="i"
           :to="useRoute().path + job.attributes.slug"
@@ -78,17 +75,23 @@ export default defineNuxtComponent({
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig()
-    const { pending, data } = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+    // const {data: bannerImg} = await useLazyFetch(configPublic.apiBase + "/api/banner-image")
 
     return {
-      jobs: data,
-      pending
+      jobs,
+      // bannerImg
     }
   },
 
   computed: {
     getJobs() {
       return this.jobs?.data
+    },
+    getBanner() {
+      return "https://picsum.photos/2000/3000"
+
+      // return this.bannerImg?.data?.attributes?.updatedAt
     }
   },
 
@@ -111,7 +114,7 @@ export default defineNuxtComponent({
   @apply text-base flex-col justify-center;
 
   & .banner {
-    @apply bg-black h-screen;
+    @apply h-screen bg-cover bg-no-repeat bg-center;
 
     & .banner-text {
       @apply relative top-1/2 left-0;
@@ -140,7 +143,6 @@ export default defineNuxtComponent({
 
   & main {
     @apply my-28;
-
     & .open-positions {
       @apply text-grey;
     }
