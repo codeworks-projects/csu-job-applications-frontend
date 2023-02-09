@@ -1,8 +1,7 @@
 <template>
   <div class="page">
     <!-- INFO ON JOB -->
-    <div v-if="pending">Loading...</div>
-    <JobInfo v-else :job-data="getCurrentEl" />
+    <JobInfo :job-data="getCurrentEl" />
 
     <!-- FORM -->
     <form class="form-ct">
@@ -51,15 +50,6 @@
               placeholder="Data"
               required
             />
-            <!-- <TextInput
-              v-model="validations.date"
-              :valid="isDateValid"
-              type="data"
-              class="input"
-              aspect="fill"
-              placeholder="Data"
-              required
-            /> -->
           </div>
 
           <TextInput
@@ -79,13 +69,6 @@
             aspect="fill"
             placeholder="Messaggio"
           />
-
-          <!-- <div class="link">
-            <a href="#"> Link al curriculum </a>
-          </div> -->
-
-          <!-- <p v-if="errorInForm === true" class="form-error"> Qualcosa è andato storto, riprova </p>
-          <p v-if="errorInForm === false" class="form-success"> Abbiamo ricevuto la tua candidatura, grazie! </p> -->
 
           <div class="btn-ct">
             <Button 
@@ -214,14 +197,6 @@ export default defineNuxtComponent({
       this.authorization = !this.authorization;
     },
 
-    // somethingWrong() {
-    //   this.errorInForm = true;
-    //   console.log(this.errorInForm);
-      
-
-    //   setTimeout(() => this.errorInForm = false, 1000);
-    // },
-
     finalCheck() {
       if (
         !this.validations?.name ||
@@ -277,13 +252,6 @@ export default defineNuxtComponent({
           border: 1px solid rgb(179 179 179);
         }
 
-        & .form-error {
-          @apply mt-2 p-2 w-full bg-red text-center;
-        }
-        & .form-success {
-          @apply mt-2 p-2 w-full bg-green text-center;
-        }
-
         & .link {
           @apply text-primary underline m-3 p-1;
         }
@@ -308,6 +276,15 @@ export default defineNuxtComponent({
   }
 }
 
+@media only screen and (max-width:1500px) {
+  .page {
+    & .form-ct {
+      & .form-wrapper {
+        @apply w-1/2;
+      }
+    }
+  }
+}
 @media only screen and (max-width:980px) {
   .page {
     & .form-ct {
@@ -318,7 +295,7 @@ export default defineNuxtComponent({
   }
 }
 
-@media only screen and (max-width:500px) {
+@media only screen and (max-width:700px) {
   .page {
     & .form-ct {
       & .form-wrapper {

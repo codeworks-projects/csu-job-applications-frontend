@@ -194,4 +194,14 @@ export default defineNuxtComponent({
     @apply pointer-events-none opacity-25;
   }
 }
+
+@media only screen and (max-width:500px) {
+  .date-input {
+    & input {
+      &::after {
+        @apply hidden;
+      }
+    }
+  }
+}
 </style>

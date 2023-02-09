@@ -60,11 +60,11 @@
 <script lang="ts">
 
 export default defineNuxtComponent({
-  data() {
-    return {
-      jobs: {},
-    }
-  },
+  // data() {
+  //   return {
+  //     jobs: {},
+  //   }
+  // },
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig()

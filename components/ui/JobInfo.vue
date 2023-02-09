@@ -1,21 +1,58 @@
 <template>
     <div class="section-ct container center">
-        <div class="section-wrapper">
+        <div v-if="isPlaceholder" class="section-wrapper placeholder">
             <!-- Title -->
             <div class="title">
                 {{ getTitle }}
             </div>
 
             <!-- Sections -->
-            <div class="section" :class="isShowned.includes(i) ? 'active' : ''"
-                v-for="(info, i) in getInformations" :key="i">
-                <h1 @click="toggleShow(i)">{{ info.title }}</h1>
-                <p class="info-job" v-if="isShowned.includes(i)">
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+
+            <!-- Divisore -->
+            <div class="section"></div>
+        </div>
+
+        <div v-else class="section-wrapper">
+            <!-- Title -->
+            <div class="title">
+                {{ getTitle }}
+            </div>
+
+            <!-- Sections -->
+            <div
+                class="section" 
+                :class="isShowned.includes(i) ? 'active' : ''"
+                v-for="(info, i) in getInformations"
+                :key="i"
+            >
+                <h1 @click="toggleShow(i)">
+                    {{ info.title }}
+                </h1>
+                <p  
+                    class="info-job" 
+                    v-if="isShowned.includes(i)"
+                >
                     {{ info.description }}
                 </p>
 
                 <!-- Toggle -->
-                <div class="toggle" :class="isShowned.includes(i) ? 'active' : ''" @click="toggleShow(i)">
+                <div   
+                    class="toggle" 
+                    :class="isShowned.includes(i) ? 'active' : ''" 
+                    @click="toggleShow(i)"
+                >
                     <div class="sign">
                         <span v-if="isShowned.includes(i)">&minus;</span>
                         <span v-else>&plus;</span>
@@ -35,6 +72,10 @@ export default defineNuxtComponent({
         jobData: {
             type: Object,
             default: {},
+        },
+        isPlaceholder: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
@@ -84,7 +125,7 @@ export default defineNuxtComponent({
             }
 
             & .info-job {
-                @apply mt-2 flex;
+                @apply mt-2 w-2/3 flex;
             }
 
             & .toggle {
@@ -113,18 +154,37 @@ export default defineNuxtComponent({
                 }
             }
         }
+
         & .section:hover {
             & h1 {
                 @apply text-black;
             }
         }
+
         & .section.active {
             & h1 {
                 @apply text-primary;
             }
+
             & .info-job {
                 @apply text-black;
             }
+        }
+    }
+    & .placeholder {
+        & .title {
+            @apply h-20 bg-placeholder;
+        }
+        & .section {
+            @apply border-t-primary;
+
+            & h1 {
+                @apply h-10 mt-2 w-1/4 bg-placeholder;
+            }
+            & p {
+                @apply h-20 mt-2 w-2/3 bg-placeholder;
+            }
+
         }
     }
 }

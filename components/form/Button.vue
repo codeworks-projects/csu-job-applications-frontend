@@ -77,7 +77,7 @@ export default defineNuxtComponent({
   line-height: 42px;
 
   & > svg {
-    @apply align-middle mr-2;
+    @apply align-middle;
 
     width: 18px;
     height: 18px;
