@@ -139,10 +139,10 @@ export default defineNuxtComponent({
     }
 
     & .header {
-      @apply flex items-center justify-between gap-x-4 px-4 pt-5 mb-3;
+      @apply flex items-center justify-between gap-x-4 px-6 pt-5 mb-3;
 
       & .close {
-        @apply flex items-center justify-center transition-opacity cursor-pointer bg-secondary text-center;
+        @apply flex items-center justify-center transition-opacity cursor-pointer bg-secondary text-center shrink-0;
 
         width: 35px;
         height: 35px;
@@ -162,7 +162,7 @@ export default defineNuxtComponent({
       }
 
       & .title {
-        @apply text-3xl truncate font-bold;
+        @apply text-2xl truncate font-bold;
       }
     }
 
@@ -203,24 +203,10 @@ export default defineNuxtComponent({
 @media only screen and (max-width: 980px) {
   .modal {
     & .box {
-      @apply absolute;
+      @apply absolute top-5 left-5 right-5 bottom-5;
 
-      &:not(.keep-height-inline-style) {
-        @apply h-auto my-0 overflow-y-auto !important;
-
-        top: 15px;
-        bottom: 15px;
-      }
-
-      &:not(.keep-width-inline-style) {
-        @apply w-auto mx-0 !important;
-
-        right: 15px;
-        left: 15px;
-      }
-      & .header {
-        @apply flex-row-reverse justify-end;
-      }
+      width: auto !important;
+      height: auto !important;
     }
   }
 }

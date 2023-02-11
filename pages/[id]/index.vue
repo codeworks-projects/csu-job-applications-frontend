@@ -11,7 +11,6 @@
           <strong>{{ $t("jobs.asFastAsWeCan") }}</strong>
         </div>
         <div class="form">
-
           <TextInput
             v-model="validations.name"
             :valid="isNameValid"
@@ -55,12 +54,12 @@
           <TextInput
             v-model="validations.profession"
             :valid="isProfessionValid"
-              type="text"
-              class="input col-span-2"
-              aspect="fill"
-              placeholder="Professione"
-              required
-            />
+            type="text"
+            class="input col-span-2"
+            aspect="fill"
+            placeholder="Professione"
+            required
+          />
 
           <TextArea
             v-model="validations.message"
@@ -71,7 +70,7 @@
           />
 
           <div class="btn-ct">
-            <Button 
+            <Button
               value="Apply"
               icon="arrow-up-right"
               type="primary"
@@ -100,21 +99,23 @@
       </div>
     </form>
 
-    <Modal 
+    <Modal
       :is-visible="errorInForm === true"
-      title="Si è verificato un errore"
+      :title="$t('jobs.pleaseCompleteAllMandatoryFields')"
+      :height="200"
       @close="errorReset()"
     >
-      <p>Ricorda che Nome, Cognome, Email, Data e i Termini di servizio sono tutti campi obbligatori</p>
+      <p>{{ $t("jobs.mandatoryFieldsDesc") }}</p>
+      <Button :value="$t('common.okThanks')" @click="errorReset()" />
     </Modal>
 
-    <Modal
+    <!--<Modal
       :is-visible="errorInForm === false"
-      title="Tutto è andato a buon fine"
+      :title="$t('jobs.formSubmissionConfirmationTitle')"
       @close="errorReset()"
     >
-      <p>Abbiamo ricevuto la tua candidatura, grazie!</p>
-    </Modal>
+    <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
+    </Modal> // NOTE: commented due to wrong/incomplete implementation -->
   </div>
 </template>
 
@@ -140,13 +141,15 @@ export default defineNuxtComponent({
   },
 
   async setup() {
-    const { public: configPublic } = useRuntimeConfig()
-    const { pending, data } = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+    const { public: configPublic } = useRuntimeConfig();
+    const { pending, data } = await useLazyFetch(
+      configPublic.apiBase + "/api/jobs/?populate=*"
+    );
 
     return {
       jobs: data,
       pending,
-    }
+    };
   },
 
   computed: {
@@ -163,28 +166,25 @@ export default defineNuxtComponent({
 
     // VALIDATIONS
     isNameValid() {
-        return (
-            this.validations.name.length > 2 ||
-            this.validations.name === ''
-        )
+      return this.validations.name.length > 2 || this.validations.name === "";
     },
     isSurnameValid() {
-        return (
-            this.validations.surname.length > 2 ||
-            this.validations.surname === ''
-        )
+      return (
+        this.validations.surname.length > 2 || this.validations.surname === ""
+      );
     },
     isEmailValid() {
       return (
-        (this.validations.email.length > 0 && this.validations.email.match(/^[^@]+@[^@]+\.[^@]+$/)) ||
+        (this.validations.email.length > 0 &&
+          this.validations.email.match(/^[^@]+@[^@]+\.[^@]+$/)) ||
         this.validations.email.length === 0
-      )
+      );
     },
     isProfessionValid() {
-        return (
-            this.validations.profession.length > 2 ||
-            this.validations.profession === ''
-        )
+      return (
+        this.validations.profession.length > 2 ||
+        this.validations.profession === ""
+      );
     },
   },
 
@@ -204,25 +204,23 @@ export default defineNuxtComponent({
         !this.validations?.email ||
         !this.validations?.date ||
         !this.authorization ||
-
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
         !this.isProfessionValid
-      ){
+      ) {
         // this.somethingWrong();
-        console.log('error');
+        console.log("error");
         this.errorInForm = true;
-        
-      }else{
-        console.log('success')
+      } else {
+        console.log("success");
         this.errorInForm = false;
       }
     },
 
     errorReset() {
       this.errorInForm = null;
-    }
+    },
   },
 });
 </script>
@@ -276,7 +274,7 @@ export default defineNuxtComponent({
   }
 }
 
-@media only screen and (max-width:1500px) {
+@media only screen and (max-width: 1500px) {
   .page {
     & .form-ct {
       & .form-wrapper {
@@ -285,7 +283,7 @@ export default defineNuxtComponent({
     }
   }
 }
-@media only screen and (max-width:980px) {
+@media only screen and (max-width: 980px) {
   .page {
     & .form-ct {
       & .form-wrapper {
@@ -295,7 +293,7 @@ export default defineNuxtComponent({
   }
 }
 
-@media only screen and (max-width:700px) {
+@media only screen and (max-width: 700px) {
   .page {
     & .form-ct {
       & .form-wrapper {
