@@ -11,8 +11,8 @@
       'fill-width': aspect === 'fill',
     }"
   >
-    <icon v-if="icon !== ''" :name="icon" :type="iconType" />
     {{ value }}
+    <icon v-if="icon !== ''" :name="icon" :type="iconType" />
     <Loader
       v-if="loading"
       class="loader-ct"
@@ -70,19 +70,18 @@ export default defineNuxtComponent({
 
 <style lang="postcss" scoped>
 .button {
-  @apply relative inline-block rounded-md px-6 text-base font-semibold select-none;
+  @apply relative inline-block mt-3 px-3 text-base font-thin select-none;
 
   min-width: 50px;
   height: 40px;
   line-height: 42px;
 
   & > svg {
-    @apply align-top mr-2;
+    @apply align-middle;
 
     width: 18px;
     height: 18px;
-    margin-top: 16px;
-    fill: theme(colors.white);
+    fill: theme(colors.secondary);
   }
 
   & > .loader-ct {
@@ -94,19 +93,19 @@ export default defineNuxtComponent({
     @apply bg-primary text-white;
 
     &:hover {
-      @apply bg-primary-hover;
+      @apply bg-primary-hover opacity-90;
     }
   }
 
   &.secondary {
-    @apply bg-secondary text-black;
+    @apply bg-secondary text-primary;
 
     &:hover {
-      @apply bg-secondary-hover;
+      @apply bg-secondary-hover opacity-90;
     }
 
     & > svg {
-      fill: theme(colors.black);
+      fill: theme(colors.primary);
     }
   }
 

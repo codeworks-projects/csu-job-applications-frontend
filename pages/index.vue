@@ -1,89 +1,223 @@
 <template>
-  <div class="demo-ct">
-    <h1>{{ $t("hello", { name: "developer" }) }}</h1>
-    <nuxt-img
-      src="/image/example-img-to-compress.png"
-      sizes="sm:100vw md:50vw lg:400px"
-      format="webp"
-      quality="80"
-      loading="lazy"
-    />
-    <Icon name="map" />
-    <TextInput label="Hello" description="This is a text input" required />
-    <TextArea label="A text area" />
-    <div>
-      <Button value="This is a button" class="mr-3" />
-      <Button value="This is a button" loading class="mr-3" />
-      <Button value="This is a button" type="secondary" />
+  <div class="page">
+    <div class="banner" :style="{ backgroundImage: 'url(' + getBanner + ')' }">
+      <div class="banner-text container center">
+        <h1>Die heißesten Winterjobs</h1>
+        <div
+          class="icon-ct"
+          @click="goTo('job-section')"
+        >
+          <Icon name="arrow-down"/>
+        </div>
+
+      </div>
     </div>
-    <div>
-      <Checkbox label="Check me" />
-    </div>
-    <div>
-      <Checkbox label="Check me" type="switch-on" />
-    </div>
-    <div>
-      <DateInput label="Enter a date" />
-    </div>
-    <div>
-      <NavigationTabs
-        :items="navigationTabsItems"
-        :cur-item="curNavigationTabItem"
-        @choose="setCurNavigationTab"
-      />
-    </div>
-    <div>
-      <Modal :is-visible="modalIsVisible" @close="hideModal" />
-      <Button value="Show modal" @click="showModal" />
-    </div>
+
+    <!-- Switch prova per linguaggio -->
+    <!-- <h1 class="text-9xl">{{ $t('hello', { name: 'vue-i18n' }) }}</h1>
+    <form>
+      <label for="locale-select">{{ $t('language') }}: </label>
+      <select id="locale-select" v-model="$i18n.locale">
+        <option value="it">it</option>
+        <option value="de">de</option>
+      </select>
+    </form> -->
+
+    <main ref="job-section" class="container center">
+      <p class="open-positions">{{ $t('common.openPositions') }}</p>
+      <div class="section-wrapper" >
+        <nuxt-link
+          class="section"
+          v-for="(job, i) in getJobs"
+          :key="i"
+          :to="useRoute().path + job.attributes.slug"
+        >
+          <h1>
+            {{ job.attributes.title }}
+          </h1>
+          <ul class="info-job">
+            <li>{{ job.attributes.place }}</li>
+            <li>{{ job.attributes.hours }}</li>
+          </ul>
+        </nuxt-link>
+      </div>
+
+      <div 
+        v-if="!getJobs"
+        class="section-wrapper placeholder"
+      >
+            <!-- Sections -->
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+            <div class="section" >
+                <h1></h1>
+                <p></p>
+            </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script lang="ts">
+
 export default defineNuxtComponent({
-  setup() {
+  // data() {
+  //   return {
+  //     jobs: {},
+  //   }
+  // },
+
+  async setup() {
+    const { public: configPublic } = useRuntimeConfig()
+    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
+    // const {data: bannerImg} = await useLazyFetch(configPublic.apiBase + "/api/banner-image")
+
     return {
-      curNavigationTabItem: ref("one"),
-      modalIsVisible: ref(false),
-      navigationTabsItems: [
-        {
-          id: "one",
-          name: "One",
-        },
-        {
-          id: "two",
-          name: "Two",
-        },
-        {
-          id: "three",
-          name: "Three",
-        },
-      ],
-    };
+      jobs,
+      // bannerImg
+    }
+  },
+
+  computed: {
+    getJobs() {
+      return this.jobs?.data
+    },
+    getBanner() {
+      return "https://picsum.photos/2000/3000"
+
+      // return this.bannerImg?.data?.attributes?.updatedAt
+    }
   },
 
   methods: {
-    setCurNavigationTab(newTabId: string) {
-      this.curNavigationTabItem = newTabId;
-    },
-
-    showModal() {
-      this.modalIsVisible = true;
-    },
-
-    hideModal() {
-      this.modalIsVisible = false;
-    },
-  },
+    goTo(refName) {
+      const element = this.$refs[refName];
+      const top = element.offsetTop;
+      window.scrollTo({
+        top: top,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
 });
 </script>
 
 <style lang="postcss" scoped>
-.demo-ct {
-  @apply flex-col justify-center space-y-8 p-5;
+.page {
+  @apply text-base flex-col justify-center;
 
-  & h1 {
-    @apply font-bold font-mono text-primary;
+  & .banner {
+    @apply h-screen bg-cover bg-no-repeat bg-center;
+
+    & .banner-text {
+      @apply relative top-1/2 left-0;
+
+      & h1 {
+        @apply text-8xl font-light text-white;
+
+        line-height: 1.2;
+      }
+
+      & .icon-ct {
+        @apply mt-10 h-20 w-14 text-primary;
+
+        & svg {
+          @apply w-full h-full;
+
+          fill: currentColor;
+        }
+
+        &:hover {
+          @apply cursor-pointer;
+        }
+      }
+    }
+  }
+
+  & main {
+    @apply my-28;
+    & .open-positions {
+      @apply text-grey;
+    }
+
+    & .section-wrapper {
+        & .section {
+            @apply block relative w-full mt-6 pt-2 pb-4 border-t-4 border-t-primary text-grey;
+                
+            & h1 {
+                @apply text-4xl pt-4 font-light;
+            }
+            & .info-job {
+                @apply mt-8 flex;
+
+                & li {
+                    @apply mx-1;
+
+                    &::after {
+                        content: ',';
+                    }
+
+                    &:last-of-type::after {
+                        content: '.';
+                    }   
+                }
+            }
+        }
+        & .section:hover {
+            & h1 {
+                @apply text-black cursor-pointer;
+            }
+        }
+    }
+
+    & .placeholder {
+      & .title {
+          @apply h-20 bg-placeholder;
+      }
+      & .section {
+          @apply border-t-primary;
+          & h1 {
+              @apply h-10 mt-2 bg-placeholder;
+          }
+          & p {
+              @apply h-5 mt-7 w-2/3 bg-placeholder;
+          }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width:980px) {
+  .page {
+    & .banner {
+      & .banner-text {
+        & h1 {
+          @apply text-6xl;
+        }
+
+        & .icon-ct {
+          @apply mt-10 h-20 w-14 text-primary;
+
+          & svg {
+            @apply w-full h-full;
+
+            fill: currentColor;
+          }
+
+          &:hover {
+            @apply cursor-pointer;
+          }
+        }
+      }
+    }
   }
 }
 </style>
