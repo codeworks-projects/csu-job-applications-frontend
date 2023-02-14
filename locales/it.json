@@ -1,7 +1,6 @@
 {
-  "hello": "Ciao, {name}!",
-  "language": "Lingua",
   "common": {
+    "winterJobs": "Die heißesten Winterjobs",
     "info": "info",
     "csuEmail": "csu-online.it",
     "csuAddress": "Via E. Ferrari, 5 39100 Bolzano",
@@ -21,7 +20,7 @@
     "pleaseCompleteAllMandatoryFields": "Completa i campi obbligatori",
     "mandatoryFieldsDesc": "Nome, Cognome, Email, Data e i Termini di servizio sono tutti campi obbligatori.",
     "formSubmissionConfirmationTitle": "Grazie!",
-    "formSubmissionConfirmation": "Abbiamo ricevuto la tua candidatura e provvederemo a datri riscontro al più presto sulla tua email."
+    "formSubmissionConfirmation": "Abbiamo ricevuto la tua candidatura e provvederemo a darti riscontro al più presto sulla tua email."
   },
   "footer": {
     "didYouNotFindThePositionYouWereLookingFor": "Non hai trovato la posizione che cercavi?",

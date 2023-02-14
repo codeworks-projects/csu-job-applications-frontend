@@ -14,7 +14,12 @@ export default {};
 
 <style lang="postcss" scoped>
 header {
-  @apply absolute top-24 left-6 right-6;
+  @apply absolute top-24 left-6 right-6 z-10;
+  & .container {
+    & .image-ct {
+      @apply inline-block w-56 h-20;
+    }
+  }
 }
 
 @media only screen and (max-width: 980px) {
