@@ -31,12 +31,12 @@
             required
           />
 
-          <div class="grid grid-cols-3 gap-x-2">
+          <div class="double-input-ct">
             <TextInput
               v-model="validations.email"
               :valid="isEmailValid"
               type="email"
-              class="input col-span-2"
+              class="input md:col-span-2"
               aspect="fill"
               placeholder="Email*"
               required
@@ -74,7 +74,7 @@
               value="Apply"
               icon="arrow-up-right"
               type="primary"
-              @click="getLog(), finalCheck()"
+              @click="finalCheck()"
             />
           </div>
           <div class="checkbox-ct">
@@ -82,7 +82,6 @@
               v-model="authorization"
               :checked="authorization === true"
               required
-              @click="getLog()"
             />
             <p class="checkbox-info">
               {{ $t("jobs.yourPersonalData") }}
@@ -100,13 +99,23 @@
     </form>
 
     <Modal
-      :is-visible="errorInForm === true"
+      :is-visible="isErrorModalVisible === true"
       :title="$t('jobs.pleaseCompleteAllMandatoryFields')"
       :height="200"
-      @close="errorReset()"
+      @close="toggleErrorModal()"
     >
       <p>{{ $t("jobs.mandatoryFieldsDesc") }}</p>
-      <Button :value="$t('common.okThanks')" @click="errorReset()" />
+      <Button :value="$t('common.okThanks')" @click="toggleErrorModal()" />
+    </Modal>
+
+    <Modal
+      :is-visible="isSuccessModalVisible === true"
+      :title="$t('jobs.formSubmissionConfirmationTitle')"
+      :height="200"
+      @close="toggleSuccessModal()"
+    >
+      <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
+      <Button :value="$t('common.okThanks')" @click="toggleSuccessModal()" />
     </Modal>
 
     <!--<Modal
@@ -124,8 +133,9 @@ export default defineNuxtComponent({
   data() {
     return {
       jobs: {},
-
-      errorInForm: null,
+      
+      isErrorModalVisible: false,
+      isSuccessModalVisible: false,
 
       // VALIDATIONS
       validations: {
@@ -186,19 +196,8 @@ export default defineNuxtComponent({
         this.validations.profession === ""
       );
     },
-  },
-
-  methods: {
-    getLog() {
-      console.log(this.validations, this.authorization);
-    },
-
-    authorize() {
-      this.authorization = !this.authorization;
-    },
-
-    finalCheck() {
-      if (
+    isFormValid() {
+      return (
         !this.validations?.name ||
         !this.validations?.surname ||
         !this.validations?.email ||
@@ -208,18 +207,30 @@ export default defineNuxtComponent({
         !this.isSurnameValid ||
         !this.isEmailValid ||
         !this.isProfessionValid
-      ) {
-        // this.somethingWrong();
-        console.log("error");
-        this.errorInForm = true;
-      } else {
-        console.log("success");
-        this.errorInForm = false;
-      }
+      )
+    },
+  },
+
+  methods: {
+    authorize() {
+      this.authorization = !this.authorization;
     },
 
-    errorReset() {
-      this.errorInForm = null;
+    toggleErrorModal() {
+      this.isErrorModalVisible = !this.isErrorModalVisible
+    },
+    toggleSuccessModal() {
+      this.isSuccessModalVisible = !this.isSuccessModalVisible
+    },
+
+    finalCheck() {
+      if (!this.isFormValid) {
+        console.log("success");
+        this.toggleSuccessModal();
+      } else {
+        console.log("error");
+        this.toggleErrorModal();
+      }
     },
   },
 });
@@ -248,6 +259,10 @@ export default defineNuxtComponent({
           @apply mt-2 w-full bg-white border-grey;
 
           border: 1px solid rgb(179 179 179);
+        }
+
+        & .double-input-ct {
+          @apply grid grid-cols-1 md:grid-cols-3 gap-x-2;
         }
 
         & .link {

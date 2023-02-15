@@ -1,8 +1,9 @@
 <template>
   <div class="page">
     <div class="banner" :style="{ backgroundImage: 'url(' + getBanner + ')' }">
+      <div class="banner-overlay"></div>
       <div class="banner-text container center">
-        <h1>Die heißesten Winterjobs</h1>
+        <h1>{{ $t('common.winterJobs') }}</h1>
         <div
           class="icon-ct"
           @click="goTo('job-section')"
@@ -89,7 +90,7 @@ export default defineNuxtComponent({
       return this.jobs?.data
     },
     getBanner() {
-      return "https://picsum.photos/2000/3000"
+      return 'https://csu.codeworks.build/uploads/banner_e24acdfc66.png'
 
       // return this.bannerImg?.data?.attributes?.updatedAt
     }
@@ -114,7 +115,11 @@ export default defineNuxtComponent({
   @apply text-base flex-col justify-center;
 
   & .banner {
-    @apply h-screen bg-cover bg-no-repeat bg-center;
+    @apply relative h-screen bg-cover bg-no-repeat bg-center;
+    
+    & .banner-overlay {
+      @apply bg-black opacity-40 absolute w-full h-full;
+    }
 
     & .banner-text {
       @apply relative top-1/2 left-0;
