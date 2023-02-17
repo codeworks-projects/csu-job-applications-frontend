@@ -157,7 +157,7 @@ export default defineNuxtComponent({
     const { public: configPublic } = useRuntimeConfig();
     const {locale} = useI18n();
     const { pending, data } = await useLazyFetch(
-      configPublic.apiBase + "/api/job-offers/?populate=*/*&locale=" + "it"
+      configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale
     );
 
     return {

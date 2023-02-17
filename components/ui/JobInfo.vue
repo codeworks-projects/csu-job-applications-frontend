@@ -30,8 +30,6 @@
                 {{ getTitle }}
             </div>
 
-            {{ jobData }}
-
             <!-- Sections -->
             <div
                 class="section" 
@@ -42,16 +40,13 @@
                 <h1
                     @click="toggleShow(i)"
                 >
-                    {{ i }}
-                    <!-- {{ info.title }} -->
-                    
+                    {{ info.title }}
                 </h1>
                 <p  
                     class="info-job" 
                     v-if="isShowned.includes(i)"
                 >
-                    {{ info }}
-                    <!-- {{ info.description }} -->
+                    {{ info.description }}
                 </p>
 
                 <!-- Toggle -->
