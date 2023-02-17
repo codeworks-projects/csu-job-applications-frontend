@@ -30,6 +30,8 @@
                 {{ getTitle }}
             </div>
 
+            {{ jobData }}
+
             <!-- Sections -->
             <div
                 class="section" 
@@ -37,14 +39,19 @@
                 v-for="(info, i) in getInformations"
                 :key="i"
             >
-                <h1 @click="toggleShow(i)">
-                    {{ info.title }}
+                <h1
+                    @click="toggleShow(i)"
+                >
+                    {{ i }}
+                    <!-- {{ info.title }} -->
+                    
                 </h1>
                 <p  
                     class="info-job" 
                     v-if="isShowned.includes(i)"
                 >
-                    {{ info.description }}
+                    {{ info }}
+                    <!-- {{ info.description }} -->
                 </p>
 
                 <!-- Toggle -->
@@ -100,6 +107,23 @@ export default defineNuxtComponent({
         getInformations() {
             return this.jobData?.attributes?.informations;
         },
+        // getInformations() {
+        //     let arr:any;
+        //     const data = this.jobData?.attributes
+
+        //     data.forEach((value, key) => {
+        //         if(
+        //             key !== "createdAt" ||
+        //             key !== "updatedAt" ||
+        //             key !== "publishedAt" ||
+        //             key !== "locale" ||
+        //             key !== "title" ||
+        //             key !== "slug"
+        //         ){value.push(arr)}
+        //     });
+
+        //     return arr;
+        // },
     },
 });
 </script>

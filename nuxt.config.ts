@@ -49,8 +49,8 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: "https://api.spacex.land/graphql",
-        browserHttpEndpoint: "https://api.spacex.land/graphql",
+        httpEndpoint: process.env.NUXT_PUBLIC_API_BASE,
+        browserHttpEndpoint: process.env.NUXT_PUBLIC_API_BASE,
       },
     },
   },

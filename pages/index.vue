@@ -66,18 +66,14 @@
 </template>
 
 <script lang="ts">
+import { useI18n } from 'vue-i18n';
 
 export default defineNuxtComponent({
-  // data() {
-  //   return {
-  //     jobs: {},
-  //   }
-  // },
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig()
-    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/jobs/?populate=*")
-    // const {data: bannerImg} = await useLazyFetch(configPublic.apiBase + "/api/banner-image")
+    const { locale } = useI18n();
+    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/job-offers/?populate=*/&locale=" + 'it')
 
     return {
       jobs,
