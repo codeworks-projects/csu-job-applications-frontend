@@ -3,14 +3,10 @@
     <div class="banner" :style="{ backgroundImage: 'url(' + getBanner + ')' }">
       <div class="banner-overlay"></div>
       <div class="banner-text container center">
-        <h1>{{ $t('common.winterJobs') }}</h1>
-        <div
-          class="icon-ct"
-          @click="goTo('job-section')"
-        >
-          <Icon name="arrow-down"/>
+        <h1>{{ $t("common.winterJobs") }}</h1>
+        <div class="icon-ct" @click="goTo('job-section')">
+          <Icon name="arrow-down" />
         </div>
-
       </div>
     </div>
 
@@ -25,8 +21,8 @@
     </form> -->
 
     <main ref="job-section" class="container center">
-      <p class="open-positions">{{ $t('common.openPositions') }}</p>
-      <div class="section-wrapper" >
+      <p class="open-positions">{{ $t("common.openPositions") }}</p>
+      <div class="section-wrapper">
         <nuxt-link
           class="section"
           v-for="(job, i) in getJobs"
@@ -43,56 +39,54 @@
         </nuxt-link>
       </div>
 
-      <div 
-        v-if="!getJobs"
-        class="section-wrapper placeholder"
-      >
-            <!-- Sections -->
-            <div class="section" >
-                <h1></h1>
-                <p></p>
-            </div>
-            <div class="section" >
-                <h1></h1>
-                <p></p>
-            </div>
-            <div class="section" >
-                <h1></h1>
-                <p></p>
-            </div>
+      <div v-if="!getJobs" class="section-wrapper placeholder">
+        <!-- Sections -->
+        <div class="section">
+          <h1></h1>
+          <p></p>
+        </div>
+        <div class="section">
+          <h1></h1>
+          <p></p>
+        </div>
+        <div class="section">
+          <h1></h1>
+          <p></p>
+        </div>
       </div>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 export default defineNuxtComponent({
-
   async setup() {
-    const { public: configPublic } = useRuntimeConfig()
-    const {locale} = useI18n();
-    console.log(locale.value = 'de');
-    
-    
-    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value)
+    const { public: configPublic } = useRuntimeConfig();
+    const { locale } = useI18n();
+
+    const { data: jobs } = await useLazyFetch(
+      configPublic.apiBase +
+        "/api/job-offers/?populate=*&locale=" +
+        locale.value
+    );
 
     return {
       jobs,
       // bannerImg
-    }
+    };
   },
 
   computed: {
     getJobs() {
-      return this.jobs?.data
+      return this.jobs?.data;
     },
     getBanner() {
-      return 'https://csu.codeworks.build/uploads/banner_e24acdfc66.png'
+      return "https://csu.codeworks.build/uploads/banner_e24acdfc66.png";
 
       // return this.bannerImg?.data?.attributes?.updatedAt
-    }
+    },
   },
 
   methods: {
@@ -102,10 +96,10 @@ export default defineNuxtComponent({
       window.scrollTo({
         top: top,
         left: 0,
-        behavior: 'smooth'
-      })
-    }
-  }
+        behavior: "smooth",
+      });
+    },
+  },
 });
 </script>
 
@@ -115,7 +109,7 @@ export default defineNuxtComponent({
 
   & .banner {
     @apply relative h-screen bg-cover bg-no-repeat bg-center;
-    
+
     & .banner-overlay {
       @apply bg-black opacity-40 absolute w-full h-full;
     }
@@ -152,54 +146,53 @@ export default defineNuxtComponent({
     }
 
     & .section-wrapper {
-        & .section {
-            @apply block relative w-full mt-6 pt-2 pb-4 border-t-4 border-t-primary text-grey;
-                
-            & h1 {
-                @apply text-4xl pt-4 font-light;
-            }
-            & .info-job {
-                @apply mt-8 flex;
+      & .section {
+        @apply block relative w-full mt-6 pt-2 pb-4 border-t-4 border-t-primary text-grey;
 
-                & li {
-                    @apply mx-1;
-
-                    &::after {
-                        content: ',';
-                    }
-
-                    &:last-of-type::after {
-                        content: '.';
-                    }   
-                }
-            }
+        & h1 {
+          @apply text-4xl pt-4 font-light;
         }
-        & .section:hover {
-            & h1 {
-                @apply text-black cursor-pointer;
+        & .info-job {
+          @apply mt-8 flex;
+
+          & li {
+            @apply mx-1;
+
+            &::after {
+              content: ",";
             }
+
+            &:last-of-type::after {
+              content: ".";
+            }
+          }
         }
+      }
+      & .section:hover {
+        & h1 {
+          @apply text-black cursor-pointer;
+        }
+      }
     }
 
     & .placeholder {
       & .title {
-          @apply h-20 bg-placeholder;
+        @apply h-20 bg-placeholder;
       }
       & .section {
-          @apply border-t-primary;
-          & h1 {
-              @apply h-10 mt-2 bg-placeholder;
-          }
-          & p {
-              @apply h-5 mt-7 w-2/3 bg-placeholder;
-          }
+        @apply border-t-primary;
+        & h1 {
+          @apply h-10 mt-2 bg-placeholder;
+        }
+        & p {
+          @apply h-5 mt-7 w-2/3 bg-placeholder;
+        }
       }
     }
   }
-
 }
 
-@media only screen and (max-width:980px) {
+@media only screen and (max-width: 980px) {
   .page {
     & .banner {
       & .banner-text {
