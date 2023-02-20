@@ -130,7 +130,6 @@
 
 <script lang="ts">
 // import nuxtConfig from '~~/nuxt.config';
-import { useI18n } from 'vue-i18n';
 
 export default defineNuxtComponent({
   data() {

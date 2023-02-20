@@ -14,16 +14,6 @@
       </div>
     </div>
 
-    <!-- Switch prova per linguaggio -->
-    <!-- <h1 class="text-9xl">{{ $t('hello', { name: 'vue-i18n' }) }}</h1>
-    <form>
-      <label for="locale-select">{{ $t('language') }}: </label>
-      <select id="locale-select" v-model="$i18n.locale">
-        <option value="it">it</option>
-        <option value="de">de</option>
-      </select>
-    </form> -->
-
     <main ref="job-section" class="container center">
       <p class="open-positions">{{ $t('common.openPositions') }}</p>
       <div class="section-wrapper" >
@@ -31,7 +21,7 @@
           class="section"
           v-for="(job, i) in getJobs"
           :key="i"
-          :to="useRoute().path + job.attributes.slug"
+          :to="localePath('/') + '/' + job.attributes.slug"
         >
           <h1>
             {{ job.attributes.title }}
@@ -66,21 +56,18 @@
 </template>
 
 <script lang="ts">
-import { useI18n } from 'vue-i18n';
-
 export default defineNuxtComponent({
-
   async setup() {
+    const localePath = useLocalePath()
     const { public: configPublic } = useRuntimeConfig()
-    const {locale} = useI18n();
-    console.log(locale.value = 'de');
-    
-    
+    const { locale } = useI18n()
+
     const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value)
 
     return {
+      localePath,
       jobs,
-      // bannerImg
+      locale
     }
   },
 
@@ -92,7 +79,7 @@ export default defineNuxtComponent({
       return 'https://csu.codeworks.build/uploads/banner_e24acdfc66.png'
 
       // return this.bannerImg?.data?.attributes?.updatedAt
-    }
+    },
   },
 
   methods: {
@@ -104,8 +91,8 @@ export default defineNuxtComponent({
         left: 0,
         behavior: 'smooth'
       })
-    }
-  }
+    },
+  },
 });
 </script>
 

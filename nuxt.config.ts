@@ -1,6 +1,14 @@
+// i18n setup
+const AVAILABLE_LOCALES = ["it", "de"];
+const DEFAULT_LOCALE = AVAILABLE_LOCALES[0];
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/apollo", "@nuxt/image-edge"],
+  modules: [
+    "@nuxtjs/apollo", 
+    "@nuxt/image-edge", 
+    "@nuxtjs/i18n", 
+  ],
 
   app: {
     head: {
@@ -92,6 +100,22 @@ export default defineNuxtConfig({
     public:{
       apiBase:''
     }
+  },
+
+  i18n: {
+    locales: AVAILABLE_LOCALES.map((localeName) => ({
+      code: localeName,
+      file: localeName + ".json",
+    })),
+    lazy: true,
+    langDir: "locales",
+    defaultLocale: DEFAULT_LOCALE,
+    strategy: "prefix_except_default",
+    vueI18n: {
+      legacy: false,
+      locale: DEFAULT_LOCALE,
+      messages: {},
+    },
   },
 
   telemetry: false,
