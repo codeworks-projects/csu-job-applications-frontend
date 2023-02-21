@@ -37,7 +37,9 @@
                 v-for="(info, i) in getInformations"
                 :key="i"
             >
-                <h1 @click="toggleShow(i)">
+                <h1
+                    @click="toggleShow(i)"
+                >
                     {{ info.title }}
                 </h1>
                 <p  

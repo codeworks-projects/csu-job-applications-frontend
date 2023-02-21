@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.2.0...v1.2.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* add @nuxtjs/i18n, remove plugin, add buttons for lang switch (with issues) ([7209b93](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/7209b93d7caaeafe46192dc25d4b6f360b024aa3))
+* api syntax corrections ([cb667d0](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/cb667d0ec8cc6a56b621f70b25f0ba48c7b41ca4))
+* remove buttuns navbar ([2c5b147](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/2c5b1479bf621c6ae0bcabc3b7849c0ef14c76bd))
+* remove force locale setting ([0e38ee1](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/0e38ee1335d30b2565b85e51ffeb8c4af0ed7070))
+* start fix of multilingual ([a0845df](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/a0845dfb74794ef5835f3488b23d666f177ef5a8))
+* work on new api and lang implementation ([11a615c](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/11a615cf556b9d471503d32dd13536e803201b10))
+
 ## 1.2.0 (2023-02-14)
 
 

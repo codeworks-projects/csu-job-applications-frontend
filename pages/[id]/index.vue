@@ -129,6 +129,8 @@
 </template>
 
 <script lang="ts">
+// import nuxtConfig from '~~/nuxt.config';
+
 export default defineNuxtComponent({
   data() {
     return {
@@ -152,8 +154,10 @@ export default defineNuxtComponent({
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig();
+    const {locale} = useI18n();
+    
     const { pending, data } = await useLazyFetch(
-      configPublic.apiBase + "/api/jobs/?populate=*"
+      configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value
     );
 
     return {

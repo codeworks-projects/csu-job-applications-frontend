@@ -1,6 +1,6 @@
 {
   "common": {
-    "winterJobs": "Die heißesten Winterjobs",
+    "winterJobs": "Lavora con noi!",
     "info": "info",
     "csuEmail": "csu-online.it",
     "csuAddress": "Via E. Ferrari, 5 39100 Bolzano",
@@ -14,6 +14,7 @@
     "okThanks": "Ok, grazie"
   },
   "jobs": {
+    "andOurs": "e i nostri",
     "signTheModule": "Compila il modulo e ti contatteremo il",
     "asFastAsWeCan": " prima possibile!",
     "yourPersonalData": "Trattiamo i tuoi dati personali in conformità con la nostra",
