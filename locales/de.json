@@ -3,10 +3,10 @@
     "winterJobs": "Die heißesten Winterjobs",
     "info": "info",
     "csuEmail": "csu-online.it",
-    "csuAddress": "Via E. Ferrari, 5 39100 Bolzano",
-    "csuTelephone": "+39 0471 324239",
-    "pIva": "P.Iva",
-    "actualIva": "01588430213",
+    "csuAddress": "Via E. Ferrari, 5", 
+    "capAndBz": "39100 Bolzano",
+    "csuTelephone": "Tel +39 0471 324239",
+    "pIva": "P.Iva 01588430213",
     "contacts": "Contatti",
     "openPositions": "Posizioni aperte",
     "privacyInfo": "Informativa sulla privacy",
@@ -25,9 +25,14 @@
   },
   "footer": {
     "didYouNotFindThePositionYouWereLookingFor": "Non hai trovato la posizione che cercavi?",
-    "weAreAlwaysHereForNewCadidates": "Siamo sempre aperti a nuove candidature spontanee. Contattaci!",
-    "csuCoop": "CSU SOC. COOP",
-    "destinationCode": "Codice destinazione",
-    "actualDestinationCode": "USAL8PV"
+    "weAreAlwaysHereForNewCadidates": "Siamo sempre aperti a nuove candidature.",
+    "csu": "CSU",
+    "coop": "Soc. Coop",
+    "destinationCode": "Codice destinazione USAL8PV",
+    "riskMap": "Risk Map",
+    "ethicCode": "Codice Etico",
+    "mog": "MOG",
+    "allRightsReserved": "2023 Tutti i diritti riservati",
+    "privacyAndCoockie": "Privacy & Cookie Policy"
   }
 }
