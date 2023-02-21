@@ -17,7 +17,7 @@
           class="section"
           v-for="(job, i) in getJobs"
           :key="i"
-          :to="localePath('/') + '/' + job.attributes.slug"
+          :to="localePath('/') + job.attributes.slug"
         >
           <h1>
             {{ job.attributes.title }}

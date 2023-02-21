@@ -5,7 +5,7 @@
         <img src="~public/image/csu-logo.png" alt="csu-logo" />
       </NuxtLink>
 
-      <div class="lang-ct">
+      <!-- <div class="lang-ct">
         <ul>
           <NuxtLink
             v-for="lang in locales"
@@ -16,7 +16,7 @@
             {{ lang.code }}
           </NuxtLink>
         </ul>
-      </div>
+      </div> -->
 
     </div>
   </header>
