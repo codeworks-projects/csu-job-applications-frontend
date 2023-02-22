@@ -300,7 +300,9 @@ export default defineNuxtComponent({
     },
 
     sendEmail() {
-      this.$axios.post('/api/email', {
+      useFetch('/api/email', {
+        method: 'POST',
+        body:{
           name: this.validations.name,
           surname: this.validations.surname,
           birthday: this.validations.birthday,
@@ -311,16 +313,15 @@ export default defineNuxtComponent({
           lastWorkingExperience: this.validations.lastWorkingExperience,
           languages: this.validations.languages,
           message: this.validations.message
+        }
       })
     },
 
     finalCheck() {
       if (!this.isFormValid) {
-        console.log("success");
         this.sendEmail();
         this.toggleSuccessModal();
       } else {
-        console.log("error");
         this.toggleErrorModal();
       }
     },
