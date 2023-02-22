@@ -11,34 +11,35 @@
           <strong>{{ $t("jobs.asFastAsWeCan") }}</strong>
         </div>
         <div class="form">
+          <!-- Name -->
           <TextInput
             v-model="validations.name"
             :valid="isNameValid"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Nome*"
+            :placeholder="$t('placeholder.name')"
             required
           />
-
+          <!-- Surname -->
           <TextInput
             v-model="validations.surname"
             :valid="isSurnameValid"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Cognome*"
+            :placeholder="$t('placeholder.surname')"
             required
           />
-
+          <!-- Email and Data -->
           <div class="double-input-ct">
             <TextInput
               v-model="validations.email"
               :valid="isEmailValid"
               type="email"
-              class="input md:col-span-2"
+              class="input first-input"
               aspect="fill"
-              placeholder="Email*"
+              :placeholder="$t('placeholder.email')"
               required
             />
             <DateInput
@@ -46,27 +47,66 @@
               type="data"
               class="input"
               aspect="fill"
-              placeholder="Data"
+              :placeholder="$t('placeholder.date')"
               required
             />
           </div>
-
+          <!-- Phone and Gender -->
+          <div class="double-input-ct">
+            <TextInput
+              v-model="validations.phone"
+              :valid="isPhoneValid"
+              type="text"
+              class="input first-input"
+              aspect="fill"
+              :placeholder="$t('placeholder.phone')"
+              required
+            />
+            <Select
+              v-model="validations.gender"
+              :disabled-option="$t('placeholder.gender')"
+              :options="genders"
+              class="input"
+              aspect="fill"
+            />
+          </div>
+          <!-- Formation -->
+          <TextInput
+            v-model="validations.formation"
+            :valid="isFormationValid"
+            type="text"
+            class="input"
+            aspect="fill"
+            :placeholder="$t('placeholder.formation')"
+            required
+          />
+          <!-- Language -->
+          <TextInput
+            v-model="validations.language"
+            :valid="isLanguageValid"
+            type="text"
+            class="input"
+            aspect="fill"
+            :placeholder="$t('placeholder.language')"
+            required
+          />
+          <!-- Profession -->
           <TextInput
             v-model="validations.profession"
             :valid="isProfessionValid"
             type="text"
             class="input col-span-2"
             aspect="fill"
-            placeholder="Professione"
+            :placeholder="$t('placeholder.profession')"
             required
           />
-
+          <!-- Message -->
           <TextArea
             v-model="validations.message"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Messaggio"
+            :placeholder="$t('placeholder.message')"
           />
 
           <div class="btn-ct">
@@ -117,20 +157,10 @@
       <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
       <Button :value="$t('common.okThanks')" @click="toggleSuccessModal()" />
     </Modal>
-
-    <!--<Modal
-      :is-visible="errorInForm === false"
-      :title="$t('jobs.formSubmissionConfirmationTitle')"
-      @close="errorReset()"
-    >
-    <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
-    </Modal> // NOTE: commented due to wrong/incomplete implementation -->
   </div>
 </template>
 
 <script lang="ts">
-// import nuxtConfig from '~~/nuxt.config';
-
 export default defineNuxtComponent({
   data() {
     return {
@@ -145,10 +175,20 @@ export default defineNuxtComponent({
         surname: "",
         email: "",
         date: "",
+        gender: "",
+        phone: "",
+        formation: "",
+        language: "",
         profession: "",
         message: "",
       },
       authorization: false,
+
+      genders: [
+        this.$t('placeholder.man'),
+        this.$t('placeholder.woman'),
+        this.$t('placeholder.other'),
+      ]
     };
   },
 
@@ -194,6 +234,30 @@ export default defineNuxtComponent({
         this.validations.email.length === 0
       );
     },
+    isGenderValid() {
+      return (
+        this.validations.gender.length > 2 ||
+        this.validations.gender === ""
+      );
+    },
+    isPhoneValid() {
+      return (
+        this.validations.phone.match(/\d{10,}/) ||
+        this.validations.phone === ""
+      );
+    },
+    isFormationValid() {
+      return (
+        this.validations.formation.length > 2 ||
+        this.validations.formation === ""
+      );
+    },
+    isLanguageValid() {
+      return (
+        this.validations.language.length > 2 ||
+        this.validations.language === ""
+      );
+    },
     isProfessionValid() {
       return (
         this.validations.profession.length > 2 ||
@@ -206,10 +270,19 @@ export default defineNuxtComponent({
         !this.validations?.surname ||
         !this.validations?.email ||
         !this.validations?.date ||
+        !this.validations?.gender ||
+        !this.validations?.phone ||
+        !this.validations?.formation ||
+        !this.validations?.language ||
+        !this.validations?.profession ||
         !this.authorization ||
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
+        !this.isGenderValid ||
+        !this.isPhoneValid ||
+        !this.isFormationValid ||
+        !this.isLanguageValid ||
         !this.isProfessionValid
       )
     },
@@ -267,6 +340,10 @@ export default defineNuxtComponent({
 
         & .double-input-ct {
           @apply grid grid-cols-1 md:grid-cols-3 gap-x-2;
+
+          & .first-input {
+            @apply md:col-span-2;
+          }
         }
 
         & .link {

@@ -34,5 +34,20 @@
     "mog": "MOG",
     "allRightsReserved": "2023 Tutti i diritti riservati",
     "privacyAndCoockie": "Privacy & Cookie Policy"
+  },
+  "placeholder": {
+    "name": "Nome*",
+    "surname": "Cognome*",
+    "email": "Email*",
+    "date": "Data*",
+    "profession": "Ultima esperienza lavorativa*",
+    "message": "Messaggio",
+    "gender": "Sesso*",
+    "phone": "Cellulare*",
+    "formation": "Titolo di studio*",
+    "language": "Lingue parlate e scritte*",
+    "man": "Uomo",
+    "woman": "Donna",
+    "other": "Altro"
   }
 }
