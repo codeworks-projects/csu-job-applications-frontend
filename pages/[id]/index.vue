@@ -109,13 +109,7 @@
             :placeholder="$t('placeholder.message')"
           />
 
-          <div class="btn-ct" @click="finalCheck()" type="submit">
-            <Button
-              value="Apply"
-              icon="arrow-up-right"
-              type="primary"
-            />
-          </div>
+
           <div class="checkbox-ct">
             <Checkbox
               v-model="authorization"
@@ -132,6 +126,13 @@
                 {{ $t("common.termsOfService") }}
               </a>
             </p>
+          </div>
+          <div class="btn-ct" @click="finalCheck()" type="submit">
+            <Button
+              value="Apply"
+              icon="arrow-up-right"
+              type="primary"
+            />
           </div>
         </div>
       </div>
@@ -274,6 +275,7 @@ export default defineNuxtComponent({
         !this.validations?.studyTitle ||
         !this.validations?.languages ||
         !this.validations?.lastWorkingExperience ||
+        // !this.validations?.message ||
         !this.authorization ||
         !this.isNameValid ||
         !this.isSurnameValid ||
@@ -312,7 +314,7 @@ export default defineNuxtComponent({
           studyTitle: this.validations.studyTitle,
           lastWorkingExperience: this.validations.lastWorkingExperience,
           languages: this.validations.languages,
-          message: this.validations.message
+          message: this.validations.message,
         }
       })
     },
@@ -321,6 +323,18 @@ export default defineNuxtComponent({
       if (!this.isFormValid) {
         this.sendEmail();
         this.toggleSuccessModal();
+
+        this.validations.name = "";
+        this.validations.surname = "";
+        this.validations.email = "";
+        this.validations.birthday = "";
+        this.validations.gender = "";
+        this.validations.phone = "";
+        this.validations.studyTitle = "";
+        this.validations.languages = "";
+        this.validations.lastWorkingExperience = "";
+        this.validations.message = "";
+
       } else {
         this.toggleErrorModal();
       }

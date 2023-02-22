@@ -32,7 +32,7 @@ export default function sendContactEmail(fields) {
           studyTitle: fields.studyTitle,
           lastWorkingExperience: fields.lastWorkingExperience,
           languages: fields.languages,
-          message: fields.message
+          message: fields.message,
         },
       },
     ],

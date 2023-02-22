@@ -44,7 +44,9 @@ header {
   @apply absolute top-24 left-6 right-6 z-10;
   & .container {
     & .image-ct {
-      @apply inline-block w-56 h-20;
+      @apply inline-block w-80;
+
+      margin-left: -20px;
     }
   }
 }
