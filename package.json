@@ -19,6 +19,7 @@
     "vue-template-compiler": "^2.7.14"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
     "standard-version": "^9.5.0",
