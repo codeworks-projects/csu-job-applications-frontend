@@ -1,21 +1,18 @@
+import svgLoader from "vite-svg-loader";
+
 // i18n setup
 const AVAILABLE_LOCALES = ["it", "de"];
 const DEFAULT_LOCALE = AVAILABLE_LOCALES[0];
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "@nuxtjs/apollo", 
-    "@nuxt/image-edge", 
-    "@nuxtjs/i18n", 
-  ],
+  modules: ["@nuxtjs/apollo", "@nuxt/image-edge", "@nuxtjs/i18n"],
 
   app: {
     head: {
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
       ],
-      script: [{ src: "https://awesome-lib.js" }],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
@@ -44,8 +41,7 @@ export default defineNuxtConfig({
     },
   },
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 
   components: [
     {
@@ -96,10 +92,10 @@ export default defineNuxtConfig({
     },
   },
 
-  runtimeConfig:{
-    public:{
-      apiBase:''
-    }
+  runtimeConfig: {
+    public: {
+      apiBase: "",
+    },
   },
 
   i18n: {
@@ -116,6 +112,14 @@ export default defineNuxtConfig({
       locale: DEFAULT_LOCALE,
       messages: {},
     },
+  },
+
+  vite: {
+    plugins: [
+      svgLoader({
+        /* NOTE: add here optional config */
+      }),
+    ],
   },
 
   telemetry: false,
