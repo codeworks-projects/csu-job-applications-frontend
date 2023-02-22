@@ -1,3 +1,5 @@
+import svgLoader from "vite-svg-loader";
+
 // i18n setup
 const AVAILABLE_LOCALES = ["it", "de"];
 const DEFAULT_LOCALE = AVAILABLE_LOCALES[0];
@@ -110,6 +112,14 @@ export default defineNuxtConfig({
       locale: DEFAULT_LOCALE,
       messages: {},
     },
+  },
+
+  vite: {
+    plugins: [
+      svgLoader({
+        /* NOTE: add here optional config */
+      }),
+    ],
   },
 
   telemetry: false,
