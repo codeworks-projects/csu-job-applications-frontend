@@ -4,7 +4,7 @@
     <JobInfo :job-data="getCurrentEl" />
 
     <!-- FORM -->
-    <form class="form-ct">
+    <form class="form-ct" method="post" action="/api/email">
       <div class="form-wrapper center">
         <div class="form-title">
           {{ $t("jobs.signTheModule") }}
@@ -43,11 +43,11 @@
               required
             />
             <DateInput
-              v-model="validations.date"
+              v-model="validations.birthday"
               type="data"
               class="input"
               aspect="fill"
-              :placeholder="$t('placeholder.date')"
+              :placeholder="$t('placeholder.birthday')"
               required
             />
           </div>
@@ -72,32 +72,32 @@
           </div>
           <!-- Formation -->
           <TextInput
-            v-model="validations.formation"
-            :valid="isFormationValid"
+            v-model="validations.studyTitle"
+            :valid="isStudyTitleValid"
             type="text"
             class="input"
             aspect="fill"
-            :placeholder="$t('placeholder.formation')"
+            :placeholder="$t('placeholder.studyTitle')"
             required
           />
           <!-- Language -->
           <TextInput
-            v-model="validations.language"
-            :valid="isLanguageValid"
+            v-model="validations.languages"
+            :valid="isLanguagesValid"
             type="text"
             class="input"
             aspect="fill"
-            :placeholder="$t('placeholder.language')"
+            :placeholder="$t('placeholder.languages')"
             required
           />
           <!-- Profession -->
           <TextInput
-            v-model="validations.profession"
-            :valid="isProfessionValid"
+            v-model="validations.lastWorkingExperience"
+            :valid="isLastWorkingExperienceValid"
             type="text"
             class="input col-span-2"
             aspect="fill"
-            :placeholder="$t('placeholder.profession')"
+            :placeholder="$t('placeholder.lastWorkingExperience')"
             required
           />
           <!-- Message -->
@@ -109,12 +109,11 @@
             :placeholder="$t('placeholder.message')"
           />
 
-          <div class="btn-ct">
+          <div class="btn-ct" @click="finalCheck()" type="submit">
             <Button
               value="Apply"
               icon="arrow-up-right"
               type="primary"
-              @click="finalCheck()"
             />
           </div>
           <div class="checkbox-ct">
@@ -174,12 +173,12 @@ export default defineNuxtComponent({
         name: "",
         surname: "",
         email: "",
-        date: "",
+        birthday: "",
         gender: "",
         phone: "",
-        formation: "",
-        language: "",
-        profession: "",
+        studyTitle: "",
+        languages: "",
+        lastWorkingExperience: "",
         message: "",
       },
       authorization: false,
@@ -234,34 +233,34 @@ export default defineNuxtComponent({
         this.validations.email.length === 0
       );
     },
-    isGenderValid() {
-      return (
-        this.validations.gender.length > 2 ||
-        this.validations.gender === ""
-      );
-    },
     isPhoneValid() {
       return (
         this.validations.phone.match(/\d{10,}/) ||
         this.validations.phone === ""
       );
     },
-    isFormationValid() {
+    isGenderValid() {
       return (
-        this.validations.formation.length > 2 ||
-        this.validations.formation === ""
+        this.validations.gender.length > 2 ||
+        this.validations.gender === ""
       );
     },
-    isLanguageValid() {
+    isStudyTitleValid() {
       return (
-        this.validations.language.length > 2 ||
-        this.validations.language === ""
+        this.validations.studyTitle.length > 2 ||
+        this.validations.studyTitle === ""
       );
     },
-    isProfessionValid() {
+    isLanguagesValid() {
       return (
-        this.validations.profession.length > 2 ||
-        this.validations.profession === ""
+        this.validations.languages.length > 2 ||
+        this.validations.languages === ""
+      );
+    },
+    isLastWorkingExperienceValid() {
+      return (
+        this.validations.lastWorkingExperience.length > 2 ||
+        this.validations.lastWorkingExperience === ""
       );
     },
     isFormValid() {
@@ -269,21 +268,21 @@ export default defineNuxtComponent({
         !this.validations?.name ||
         !this.validations?.surname ||
         !this.validations?.email ||
-        !this.validations?.date ||
-        !this.validations?.gender ||
+        !this.validations?.birthday ||
         !this.validations?.phone ||
-        !this.validations?.formation ||
-        !this.validations?.language ||
-        !this.validations?.profession ||
+        !this.validations?.gender ||
+        !this.validations?.studyTitle ||
+        !this.validations?.languages ||
+        !this.validations?.lastWorkingExperience ||
         !this.authorization ||
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
-        !this.isGenderValid ||
         !this.isPhoneValid ||
-        !this.isFormationValid ||
-        !this.isLanguageValid ||
-        !this.isProfessionValid
+        !this.isGenderValid ||
+        !this.isStudyTitleValid ||
+        !this.isLanguagesValid ||
+        !this.isLastWorkingExperienceValid
       )
     },
   },
@@ -300,9 +299,25 @@ export default defineNuxtComponent({
       this.isSuccessModalVisible = !this.isSuccessModalVisible
     },
 
+    sendEmail() {
+      this.$axios.post('/api/email', {
+          name: this.validations.name,
+          surname: this.validations.surname,
+          birthday: this.validations.birthday,
+          gender: this.validations.gender,
+          phone: this.validations.phone,
+          email: this.validations.email,
+          studyTitle: this.validations.studyTitle,
+          lastWorkingExperience: this.validations.lastWorkingExperience,
+          languages: this.validations.languages,
+          message: this.validations.message
+      })
+    },
+
     finalCheck() {
       if (!this.isFormValid) {
         console.log("success");
+        this.sendEmail();
         this.toggleSuccessModal();
       } else {
         console.log("error");

@@ -14,7 +14,7 @@ export default function sendContactEmail(fields) {
       {
         to: [
           {
-            email: "alessio.crea98@gmail.com",
+            email: "giancarlocroce@flashbeing.com",
           },
         ],
         // cc: [
@@ -32,6 +32,7 @@ export default function sendContactEmail(fields) {
           studyTitle: fields.studyTitle,
           lastWorkingExperience: fields.lastWorkingExperience,
           languages: fields.languages,
+          message: fields.message
         },
       },
     ],

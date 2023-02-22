@@ -6,14 +6,12 @@
         fill: aspect === 'fill',
         md: size === 'md',
     }">
-        <InputLabel v-if="label" :text="label" :required="required"/>
+        <InputLabel v-if="label" :text="label" :required="required" />
         <div class="selector">
-            {{ prefix ? prefix : '' }}
+            {{ prefix ? prefix : "" }}
             <select v-model="selected" :required="required">
                 <option disabled value="">
-                    <!-- <span :class="{'opacity-50': value === disabledOption}"> -->
-                        {{ disabledOption }}
-                    <!-- </span> -->
+                    {{ disabledOption }}
                 </option>
                 <option v-for="option in options" :key="option" :value="option">
                     {{ option }}
@@ -28,11 +26,11 @@ export default {
     props: {
         label: {
             type: String,
-            default: '',
+            default: "",
         },
         disabledOption: {
             type: String,
-            default: '',
+            default: "",
         },
         options: {
             type: Array,
@@ -40,17 +38,17 @@ export default {
         },
         prefix: {
             type: String,
-            default: '',
+            default: "",
         },
         value: {
-            type: [String, Number],
-            default: '',
+            type: [String || Number],
+            default: "",
         },
         aspect: {
             type: String,
-            default: 'default',
+            default: "default",
             validator(value) {
-                return ['default', 'fill'].includes(value)
+                return ["default", "fill"].includes(value);
             },
         },
         required: {
@@ -67,23 +65,37 @@ export default {
         },
         size: {
             type: String,
-            default: 'base',
+            default: "base",
             validator(value) {
-                return ['base', 'md', 'sm', 'lg'].includes(value)
+                return ["base", "md", "sm", "lg"].includes(value);
             },
         },
+        modelValue: String,
     },
-    computed: {
-        selected: {
+    setup(props, { emit }) {
+        const selected = computed({
             get() {
-                return this.value
+                return props.modelValue;
             },
-            set(val) {
-                this.$emit('input', val)
+            set(newValue) {
+                emit("update:modelValue", newValue);
             },
-        },
+        });
+        return {
+            selected,
+        };
     },
-}
+    // computed: {
+    //     selected: {
+    //         get() {
+    //             return this.value;
+    //         },
+    //         set(val) {
+    //             this.$emit("input", val);
+    //         },
+    //     },
+    // },
+};
 </script>
 
 <style lang="postcss" scoped>
