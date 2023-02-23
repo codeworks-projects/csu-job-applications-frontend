@@ -27,7 +27,7 @@
         </div>
         <div class="iva-ct">
           <p>{{ $t('common.pIva') }}</p>
-          <p>{{ $t('common.destinationCode') }}</p>
+          <p>{{ $t('footer.destinationCode') }}</p>
         </div>
         <div class="links-ct">
           <a href="https://irp.cdn-website.com/78321997/files/uploaded/risk%20map%20CSU%20rev.%2012%202022.pdf">{{ $t('footer.riskMap') }}</a>
@@ -62,7 +62,7 @@ footer {
         @apply text-center text-2xl mb-14;
       }
       & .grid-ct {
-        @apply grid grid-cols-5;
+        @apply grid grid-cols-5 gap-2;
           & .iva-ct{
             @apply grid col-start-4 col-end-4;
           }
