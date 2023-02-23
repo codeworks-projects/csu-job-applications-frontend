@@ -11,76 +11,109 @@
           <strong>{{ $t("jobs.asFastAsWeCan") }}</strong>
         </div>
         <div class="form">
+          <!-- Name -->
           <TextInput
             v-model="validations.name"
             :valid="isNameValid"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Nome*"
+            :placeholder="$t('placeholder.name')"
             required
           />
-
+          <!-- Surname -->
           <TextInput
             v-model="validations.surname"
             :valid="isSurnameValid"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Cognome*"
+            :placeholder="$t('placeholder.surname')"
             required
           />
-
+          <!-- Email and Data -->
           <div class="double-input-ct">
             <TextInput
               v-model="validations.email"
               :valid="isEmailValid"
               type="email"
-              class="input md:col-span-2"
+              class="input first-input"
               aspect="fill"
-              placeholder="Email*"
+              :placeholder="$t('placeholder.email')"
               required
             />
             <DateInput
-              v-model="validations.date"
+              v-model="validations.birthday"
               type="data"
               class="input"
               aspect="fill"
-              placeholder="Data"
+              :placeholder="$t('placeholder.birthday')"
               required
             />
           </div>
-
+          <!-- Phone and Gender -->
+          <div class="double-input-ct">
+            <TextInput
+              v-model="validations.phone"
+              :valid="isPhoneValid"
+              type="text"
+              class="input first-input"
+              aspect="fill"
+              :placeholder="$t('placeholder.phone')"
+              required
+            />
+            <Select
+              v-model="validations.gender"
+              :disabled-option="$t('placeholder.gender')"
+              :options="genders"
+              class="input"
+              aspect="fill"
+            />
+          </div>
+          <!-- Formation -->
           <TextInput
-            v-model="validations.profession"
-            :valid="isProfessionValid"
+            v-model="validations.studyTitle"
+            :valid="isStudyTitleValid"
+            type="text"
+            class="input"
+            aspect="fill"
+            :placeholder="$t('placeholder.studyTitle')"
+            required
+          />
+          <!-- Language -->
+          <TextInput
+            v-model="validations.languages"
+            :valid="isLanguagesValid"
+            type="text"
+            class="input"
+            aspect="fill"
+            :placeholder="$t('placeholder.languages')"
+            required
+          />
+          <!-- Profession -->
+          <TextInput
+            v-model="validations.lastWorkingExperience"
+            :valid="isLastWorkingExperienceValid"
             type="text"
             class="input col-span-2"
             aspect="fill"
-            placeholder="Professione"
+            :placeholder="$t('placeholder.lastWorkingExperience')"
             required
           />
-
+          <!-- Message -->
           <TextArea
             v-model="validations.message"
             type="text"
             class="input"
             aspect="fill"
-            placeholder="Messaggio"
+            :placeholder="$t('placeholder.message')"
           />
 
-          <div class="btn-ct">
-            <Button
-              value="Apply"
-              icon="arrow-up-right"
-              type="primary"
-              @click="finalCheck()"
-            />
-          </div>
+
           <div class="checkbox-ct">
             <Checkbox
-              v-model="authorization"
-              :checked="authorization === true"
+              v-model="isPrivacyCheck"
+              :checked="isPrivacyCheck === true"
               required
             />
             <p class="checkbox-info">
@@ -93,6 +126,13 @@
                 {{ $t("common.termsOfService") }}
               </a>
             </p>
+          </div>
+          <div class="btn-ct" @click="finalCheck()" type="submit">
+            <Button
+              value="Apply"
+              icon="arrow-up-right"
+              type="primary"
+            />
           </div>
         </div>
       </div>
@@ -117,20 +157,10 @@
       <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
       <Button :value="$t('common.okThanks')" @click="toggleSuccessModal()" />
     </Modal>
-
-    <!--<Modal
-      :is-visible="errorInForm === false"
-      :title="$t('jobs.formSubmissionConfirmationTitle')"
-      @close="errorReset()"
-    >
-    <p>{{ $t("jobs.formSubmissionConfirmation") }}</p>
-    </Modal> // NOTE: commented due to wrong/incomplete implementation -->
   </div>
 </template>
 
 <script lang="ts">
-// import nuxtConfig from '~~/nuxt.config';
-
 export default defineNuxtComponent({
   data() {
     return {
@@ -144,11 +174,21 @@ export default defineNuxtComponent({
         name: "",
         surname: "",
         email: "",
-        date: "",
-        profession: "",
+        birthday: "",
+        gender: "",
+        phone: "",
+        studyTitle: "",
+        languages: "",
+        lastWorkingExperience: "",
         message: "",
       },
-      authorization: false,
+      isPrivacyCheck: false,
+
+      genders: [
+        this.$t('placeholder.man'),
+        this.$t('placeholder.woman'),
+        this.$t('placeholder.other'),
+      ]
     };
   },
 
@@ -194,10 +234,34 @@ export default defineNuxtComponent({
         this.validations.email.length === 0
       );
     },
-    isProfessionValid() {
+    isPhoneValid() {
       return (
-        this.validations.profession.length > 2 ||
-        this.validations.profession === ""
+        this.validations.phone.match(/\d{10,}/) ||
+        this.validations.phone === ""
+      );
+    },
+    isGenderValid() {
+      return (
+        this.validations.gender.length > 2 ||
+        this.validations.gender === ""
+      );
+    },
+    isStudyTitleValid() {
+      return (
+        this.validations.studyTitle.length > 2 ||
+        this.validations.studyTitle === ""
+      );
+    },
+    isLanguagesValid() {
+      return (
+        this.validations.languages.length > 2 ||
+        this.validations.languages === ""
+      );
+    },
+    isLastWorkingExperienceValid() {
+      return (
+        this.validations.lastWorkingExperience.length > 2 ||
+        this.validations.lastWorkingExperience === ""
       );
     },
     isFormValid() {
@@ -205,19 +269,29 @@ export default defineNuxtComponent({
         !this.validations?.name ||
         !this.validations?.surname ||
         !this.validations?.email ||
-        !this.validations?.date ||
-        !this.authorization ||
+        !this.validations?.birthday ||
+        !this.validations?.phone ||
+        !this.validations?.gender ||
+        !this.validations?.studyTitle ||
+        !this.validations?.languages ||
+        !this.validations?.lastWorkingExperience ||
+        // !this.validations?.message ||
+        !this.isPrivacyCheck ||
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
-        !this.isProfessionValid
+        !this.isPhoneValid ||
+        !this.isGenderValid ||
+        !this.isStudyTitleValid ||
+        !this.isLanguagesValid ||
+        !this.isLastWorkingExperienceValid
       )
     },
   },
 
   methods: {
     authorize() {
-      this.authorization = !this.authorization;
+      this.isPrivacyCheck = !this.isPrivacyCheck;
     },
 
     toggleErrorModal() {
@@ -227,12 +301,42 @@ export default defineNuxtComponent({
       this.isSuccessModalVisible = !this.isSuccessModalVisible
     },
 
+    sendEmail() {
+      useFetch('/api/email', {
+        method: 'POST',
+        body:{
+          name: this.validations.name,
+          surname: this.validations.surname,
+          birthday: this.validations.birthday,
+          gender: this.validations.gender,
+          phone: this.validations.phone,
+          email: this.validations.email,
+          studyTitle: this.validations.studyTitle,
+          lastWorkingExperience: this.validations.lastWorkingExperience,
+          languages: this.validations.languages,
+          message: this.validations.message,
+        }
+      })
+    },
+
     finalCheck() {
       if (!this.isFormValid) {
-        console.log("success");
+        this.sendEmail();
         this.toggleSuccessModal();
+
+        this.validations.name = "";
+        this.validations.surname = "";
+        this.validations.email = "";
+        this.validations.birthday = "";
+        this.validations.gender = "";
+        this.validations.phone = "";
+        this.validations.studyTitle = "";
+        this.validations.languages = "";
+        this.validations.lastWorkingExperience = "";
+        this.validations.message = "";
+        this.isPrivacyCheck = false;
+
       } else {
-        console.log("error");
         this.toggleErrorModal();
       }
     },
@@ -267,6 +371,10 @@ export default defineNuxtComponent({
 
         & .double-input-ct {
           @apply grid grid-cols-1 md:grid-cols-3 gap-x-2;
+
+          & .first-input {
+            @apply md:col-span-2;
+          }
         }
 
         & .link {

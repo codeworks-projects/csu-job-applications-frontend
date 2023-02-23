@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.2.1...v1.3.0) (2023-02-23)
+
+
+### Features
+
+* add new inputs in index and select ([500a139](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/500a139df424c67bc62da66357246b3c24e7e104))
+* add sendgrid ingtegration ([ff3cf32](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/ff3cf320725179968de6fb4df8e2b7c6503746b9))
+* optimized svg icons import ([73c4205](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/73c42059ad6772f8ea236c4b8fcc57e44017e7d9))
+* post function for sendgrid ([54d3caf](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/54d3caf2abdc0e584c3a3662264d69c93dea49ea))
+* update env example ([8732495](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/873249580733f438528c0146ae1e3e7be2c417db))
+
+
+### Bug Fixes
+
+* logo dimensions and checkbox position up ([d23e8aa](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/d23e8aa86cab1bf80ceb80ecdcc0ec2dea863244))
+* removed wrong awsome js import ([22c396b](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/22c396b6654125435cd8e820b07ac66da4fc0177))
+* select functioning and inputs name align with sendgrid ([5d11c8d](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/5d11c8d4d6de8f6e01f7b6a13fe4e7d119977d8a))
+* **TextArea:** v-model now returning data ([faece6f](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/faece6ff1324ff072de5e4d09c79773b6c9699c1))
+
 ### [1.2.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.2.0...v1.2.1) (2023-02-21)
 
 

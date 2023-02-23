@@ -12,8 +12,9 @@
       <input
         ref="input"
         v-model="inputModel"
-        type="date"
-        placeholder="YYYY-MM-DD"
+        type="text"
+        onfocus="this.type='date'"
+        :placeholder="placeholder"
         :required="required"
         :disabled="disabled"
         :max="maxDate"
@@ -72,6 +73,10 @@ export default defineNuxtComponent({
       default: "01-01-1970",
     },
     modelValue: String,
+    placeholder: {
+      type: String,
+      default: "YYYY-MM-DD",
+    }
   },
 
   // setup() {
@@ -129,9 +134,9 @@ export default defineNuxtComponent({
 <style lang="postcss" scoped>
 .date-input {
   & input {
-    @apply text-base px-5 bg-input rounded-md resize-none font-semibold relative cursor-pointer;
+    @apply text-base px-5 bg-white rounded-md resize-none relative cursor-pointer;
 
-    height: 52px;
+    height: 44px;
     width: 220px;
     padding-top: 13px;
     padding-bottom: 13px;
