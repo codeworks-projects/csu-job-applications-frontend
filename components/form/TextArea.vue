@@ -11,13 +11,13 @@
     <textarea
       ref="input"
       :placeholder="placeholder"
-      :value="value"
+      :value="modelValue"
       :required="required"
       :disabled="disabled"
       @keypress="keypress($event)"
-      @input="updateValue(($event.target as HTMLInputElement).value)"
       @blur="onBlur(($event.target as HTMLInputElement).value)"
-    ></textarea>
+      @input="$emit('update:modelValue', $event.target.value)"
+      ></textarea>
     <InputDescription v-if="description" :text="description" />
   </div>
 </template>
@@ -33,7 +33,7 @@ export default defineNuxtComponent({
       type: String,
       default: "",
     },
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "",
     },

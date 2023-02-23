@@ -112,8 +112,8 @@
 
           <div class="checkbox-ct">
             <Checkbox
-              v-model="authorization"
-              :checked="authorization === true"
+              v-model="isPrivacyCheck"
+              :checked="isPrivacyCheck === true"
               required
             />
             <p class="checkbox-info">
@@ -182,7 +182,7 @@ export default defineNuxtComponent({
         lastWorkingExperience: "",
         message: "",
       },
-      authorization: false,
+      isPrivacyCheck: false,
 
       genders: [
         this.$t('placeholder.man'),
@@ -276,7 +276,7 @@ export default defineNuxtComponent({
         !this.validations?.languages ||
         !this.validations?.lastWorkingExperience ||
         // !this.validations?.message ||
-        !this.authorization ||
+        !this.isPrivacyCheck ||
         !this.isNameValid ||
         !this.isSurnameValid ||
         !this.isEmailValid ||
@@ -291,7 +291,7 @@ export default defineNuxtComponent({
 
   methods: {
     authorize() {
-      this.authorization = !this.authorization;
+      this.isPrivacyCheck = !this.isPrivacyCheck;
     },
 
     toggleErrorModal() {
@@ -334,6 +334,7 @@ export default defineNuxtComponent({
         this.validations.languages = "";
         this.validations.lastWorkingExperience = "";
         this.validations.message = "";
+        this.isPrivacyCheck = false;
 
       } else {
         this.toggleErrorModal();
