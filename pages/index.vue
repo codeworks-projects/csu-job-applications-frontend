@@ -51,17 +51,21 @@
 <script lang="ts">
 export default defineNuxtComponent({
   async setup() {
-    const localePath = useLocalePath()
-    const { public: configPublic } = useRuntimeConfig()
-    const { locale } = useI18n()
+    const localePath = useLocalePath();
+    const { public: configPublic } = useRuntimeConfig();
+    const { locale } = useI18n();
 
-    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value)
+    const { data: jobs } = await useLazyFetch(
+      configPublic.apiBase +
+        "/api/job-offers/?populate=*&locale=" +
+        locale.value
+    );
 
     return {
       localePath,
       jobs,
-      locale
-    }
+      locale,
+    };
   },
 
   computed: {
@@ -82,8 +86,8 @@ export default defineNuxtComponent({
       window.scrollTo({
         top: top,
         left: 0,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     },
   },
 });
@@ -95,7 +99,6 @@ export default defineNuxtComponent({
 
   & .banner {
     @apply relative h-screen bg-cover bg-no-repeat bg-center;
-
     & .banner-overlay {
       @apply bg-black opacity-40 absolute w-full h-full;
     }

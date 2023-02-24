@@ -17,7 +17,6 @@
           </NuxtLink>
         </ul>
       </div> -->
-
     </div>
   </header>
 </template>
@@ -25,16 +24,16 @@
 <script>
 export default {
   setup() {
-    const localePath = useLocalePath()
-    const {locale, locales} = useI18n()
-    const switchLocalePath = useSwitchLocalePath()
+    const localePath = useLocalePath();
+    const { locale, locales } = useI18n();
+    const switchLocalePath = useSwitchLocalePath();
 
     return {
       localePath,
       locale,
       locales,
-      switchLocalePath
-    }
+      switchLocalePath,
+    };
   },
 };
 </script>
