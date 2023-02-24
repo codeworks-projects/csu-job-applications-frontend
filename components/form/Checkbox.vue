@@ -19,7 +19,7 @@
           :disabled="disabled"
           @click.stop="preventDefault"
         />
-        <icon name="check" />
+        <Icon name="check" />
       </div>
       <label>
         {{ label }}
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {computed} from "@vue/runtime-core";
+import { computed } from "@vue/runtime-core";
 export default defineNuxtComponent({
   model: {
     prop: "checked",
@@ -67,19 +67,23 @@ export default defineNuxtComponent({
     modelValue: Boolean,
   },
 
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const inputModel = computed({
-      get(){
-        return props.modelValue
+      get() {
+        return props.modelValue;
       },
-      set(newValue){
-        emit('update:modelValue', newValue)
-      }
-    })
+      set(newValue) {
+        emit("update:modelValue", newValue);
+      },
+    });
+
+    const isChecked = computed(() => {
+      return props.modelValue;
+    });
 
     return {
       inputModel,
-      isChecked: false,
+      isChecked,
     };
   },
 

@@ -29,7 +29,7 @@
         </div>
         <div class="iva-ct">
           <p>{{ $t("common.pIva") }}</p>
-          <p>{{ $t("common.destinationCode") }}</p>
+          <p>{{ $t("footer.destinationCode") }}</p>
         </div>
         <div class="links-ct">
           <a
