@@ -49,20 +49,23 @@
 </template>
 
 <script lang="ts">
-
 export default defineNuxtComponent({
   async setup() {
-    const localePath = useLocalePath()
-    const { public: configPublic } = useRuntimeConfig()
-    const { locale } = useI18n()
+    const localePath = useLocalePath();
+    const { public: configPublic } = useRuntimeConfig();
+    const { locale } = useI18n();
 
-    const {data: jobs} = await useLazyFetch(configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value)
+    const { data: jobs } = await useLazyFetch(
+      configPublic.apiBase +
+        "/api/job-offers/?populate=*&locale=" +
+        locale.value
+    );
 
     return {
       localePath,
       jobs,
-      locale
-    }
+      locale,
+    };
   },
 
   computed: {
@@ -83,8 +86,8 @@ export default defineNuxtComponent({
       window.scrollTo({
         top: top,
         left: 0,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     },
   },
 });

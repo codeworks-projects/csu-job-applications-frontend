@@ -4,7 +4,7 @@
     <JobInfo :job-data="getCurrentEl" />
 
     <!-- FORM -->
-    <form class="form-ct">
+    <form class="form-ct" method="post" action="/api/email">
       <div class="form-wrapper center">
         <div class="form-title">
           {{ $t("jobs.signTheModule") }}
@@ -109,7 +109,6 @@
             :placeholder="$t('placeholder.message')"
           />
 
-
           <div class="checkbox-ct">
             <Checkbox
               v-model="isPrivacyCheck"
@@ -128,11 +127,7 @@
             </p>
           </div>
           <div class="btn-ct" @click="finalCheck()" type="submit">
-            <Button
-              value="Apply"
-              icon="arrow-up-right"
-              type="primary"
-            />
+            <Button value="Apply" icon="arrow-up-right" type="primary" />
           </div>
         </div>
       </div>
@@ -165,7 +160,7 @@ export default defineNuxtComponent({
   data() {
     return {
       jobs: {},
-      
+
       isErrorModalVisible: false,
       isSuccessModalVisible: false,
 
@@ -185,19 +180,21 @@ export default defineNuxtComponent({
       isPrivacyCheck: false,
 
       genders: [
-        this.$t('placeholder.man'),
-        this.$t('placeholder.woman'),
-        this.$t('placeholder.other'),
-      ]
+        this.$t("placeholder.man"),
+        this.$t("placeholder.woman"),
+        this.$t("placeholder.other"),
+      ],
     };
   },
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig();
-    const {locale} = useI18n();
-    
+    const { locale } = useI18n();
+
     const { pending, data } = await useLazyFetch(
-      configPublic.apiBase + "/api/job-offers/?populate=*&locale=" + locale.value
+      configPublic.apiBase +
+        "/api/job-offers/?populate=*&locale=" +
+        locale.value
     );
 
     return {
@@ -236,14 +233,12 @@ export default defineNuxtComponent({
     },
     isPhoneValid() {
       return (
-        this.validations.phone.match(/\d{10,}/) ||
-        this.validations.phone === ""
+        this.validations.phone.match(/\d{10,}/) || this.validations.phone === ""
       );
     },
     isGenderValid() {
       return (
-        this.validations.gender.length > 2 ||
-        this.validations.gender === ""
+        this.validations.gender.length > 2 || this.validations.gender === ""
       );
     },
     isStudyTitleValid() {
@@ -285,7 +280,7 @@ export default defineNuxtComponent({
         !this.isStudyTitleValid ||
         !this.isLanguagesValid ||
         !this.isLastWorkingExperienceValid
-      )
+      );
     },
   },
 
@@ -295,16 +290,16 @@ export default defineNuxtComponent({
     },
 
     toggleErrorModal() {
-      this.isErrorModalVisible = !this.isErrorModalVisible
+      this.isErrorModalVisible = !this.isErrorModalVisible;
     },
     toggleSuccessModal() {
-      this.isSuccessModalVisible = !this.isSuccessModalVisible
+      this.isSuccessModalVisible = !this.isSuccessModalVisible;
     },
 
     sendEmail() {
-      useFetch('/api/email', {
-        method: 'POST',
-        body:{
+      useFetch("/api/email", {
+        method: "POST",
+        body: {
           name: this.validations.name,
           surname: this.validations.surname,
           birthday: this.validations.birthday,
@@ -315,8 +310,8 @@ export default defineNuxtComponent({
           lastWorkingExperience: this.validations.lastWorkingExperience,
           languages: this.validations.languages,
           message: this.validations.message,
-        }
-      })
+        },
+      });
     },
 
     finalCheck() {
@@ -335,7 +330,6 @@ export default defineNuxtComponent({
         this.validations.lastWorkingExperience = "";
         this.validations.message = "";
         this.isPrivacyCheck = false;
-
       } else {
         this.toggleErrorModal();
       }

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.3.0...v1.3.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* fixed logo size and minor glitches ([4eb57c4](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/4eb57c4a66bc2b12af3a47ae9b55ee623835c214))
+* new logo and footer text fix ([48538f8](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/48538f893e679b51c487115a79ae8e80f4db42a1))
+
 ## [1.3.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.2.1...v1.3.0) (2023-02-23)
 
 

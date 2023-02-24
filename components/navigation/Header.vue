@@ -17,7 +17,6 @@
           </NuxtLink>
         </ul>
       </div> -->
-
     </div>
   </header>
 </template>
@@ -25,16 +24,16 @@
 <script>
 export default {
   setup() {
-    const localePath = useLocalePath()
-    const {locale, locales} = useI18n()
-    const switchLocalePath = useSwitchLocalePath()
+    const localePath = useLocalePath();
+    const { locale, locales } = useI18n();
+    const switchLocalePath = useSwitchLocalePath();
 
     return {
       localePath,
       locale,
       locales,
-      switchLocalePath
-    }
+      switchLocalePath,
+    };
   },
 };
 </script>
@@ -44,13 +43,7 @@ header {
   @apply absolute top-24 left-6 right-6 z-10;
   & .container {
     & .image-ct {
-      @apply inline-block h-40;
-
-      margin-left: -20px;
-
-      & img {
-        height: 100%;
-      }
+      @apply inline-block w-96;
     }
   }
 }
@@ -58,6 +51,12 @@ header {
 @media only screen and (max-width: 980px) {
   header {
     @apply left-0 right-0;
+
+    & .container {
+      & .image-ct {
+        max-width: 80vw;
+      }
+    }
   }
 }
 </style>
