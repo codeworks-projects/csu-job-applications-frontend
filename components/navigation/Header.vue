@@ -7,37 +7,42 @@
 
       <div class="lang-ct">
         <ul>
-          <NuxtLink
+          <div
             v-for="lang in locales"
-            :key="lang.code"
-            :to="switchLocalePath(lang.code)"
+            :key="lang"
             class="language"
             :class="{
-              'current': lang.code === locale
+              current: lang === currentLocale,
             }"
+            @click="changeLanguage(lang)"
           >
-            {{ lang.code }}
-          </NuxtLink>
+            {{ lang }}
+          </div>
         </ul>
       </div>
     </div>
   </header>
 </template>
 
-<script>
-export default {
-  setup() {
-    const localePath = useLocalePath();
-    const { locale, locales } = useI18n();
-    const switchLocalePath = useSwitchLocalePath();
+<script setup lang="ts">
+const localePath = useLocalePath();
+const i18n = useI18n();
+const route = useRoute();
 
-    return {
-      localePath,
-      locale,
-      locales,
-      switchLocalePath,
-    };
-  },
+const lastLocale = useCookie("lastLocale");
+
+const locales = ref(i18n.localeCodes.value);
+
+const currentLocale = computed(() => {
+  return i18n.locale.value;
+});
+
+const changeLanguage = (lang: string) => {
+  if (!route.params.id) {
+    lastLocale.value = lang;
+  }
+
+  i18n.setLocale(lang);
 };
 </script>
 
@@ -51,10 +56,11 @@ header {
     }
 
     & .lang-ct {
-      & .language{
-        @apply inline-flex justify-center items-center text-primary uppercase mx-2 bg-secondary bg-opacity-40 h-10 w-10 rounded-full;
+      & .language {
+        @apply inline-flex justify-center items-center text-primary uppercase mx-2 bg-secondary
+        cursor-pointer bg-opacity-40 h-10 w-10 rounded-full;
 
-        &.current{
+        &.current {
           @apply underline underline-offset-4;
         }
       }

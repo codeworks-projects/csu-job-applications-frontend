@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- INFO ON JOB -->
-    <JobInfo :job-data="getCurrentEl" />
+    <JobInfo :job-data="currentElement" />
 
     <!-- FORM -->
     <form class="form-ct" method="post" action="/api/email">
@@ -189,30 +189,81 @@ export default defineNuxtComponent({
 
   async setup() {
     const { public: configPublic } = useRuntimeConfig();
+    const localePath = useLocalePath();
     const { locale } = useI18n();
+    const route = useRoute();
+    const router = useRouter();
 
-    const { pending, data } = await useLazyFetch(
-      configPublic.apiBase +
-        "/api/job-offers/?populate=*&locale=" +
-        locale.value
+    const jobsFetch = ref();
+
+    // COOKIES
+    const jobApplicationLocalizations: any = useCookie(
+      "jobApplicationLocalizations"
     );
 
+    const lastLocale = useCookie("lastLocale");
+
+    const clearCookies = () => {
+      lastLocale.value = null;
+      jobApplicationLocalizations.value = null;
+    };
+
+    if (lastLocale.value && lastLocale.value !== locale.value) {
+      if (!jobApplicationLocalizations.value?.length) {
+        clearCookies();
+        throw createError({
+          statusCode: 404,
+          statusMessage: "Page Not Found",
+          fatal: true,
+        });
+      }
+
+      lastLocale.value = locale.value;
+
+      const pageInCurrentLocale = jobApplicationLocalizations?.value?.find(
+        (item: any) => item?.locale === locale.value
+      );
+
+      router.replace(localePath(`/${pageInCurrentLocale.slug}`));
+    } else {
+      lastLocale.value = locale.value;
+
+      jobsFetch.value = await useFetch(
+        `${configPublic.apiBase}/api/job-offers/?populate=*&filters[slug][$eq]=${route.params.id}&locale=${locale.value}`
+      );
+
+      const { data } = jobsFetch.value;
+
+      if (!data || !data.data?.length) {
+        throw createError({
+          statusCode: 404,
+          statusMessage: "Page Not Found",
+          fatal: true,
+        });
+      }
+
+      const jobApplicationLocalizationsAvailable =
+        data?.data?.[0]?.attributes?.localizations?.data?.map((item: any) => {
+          return {
+            locale: item.attributes.locale,
+            slug: item.attributes.slug,
+          };
+        });
+
+      jobApplicationLocalizations.value =
+        jobApplicationLocalizationsAvailable ??
+        jobApplicationLocalizations.value;
+    }
+
     return {
-      jobs: data,
-      pending,
+      jobs: jobsFetch.value?.data,
+      locale,
     };
   },
 
   computed: {
-    getCurrentEl() {
-      const slug = this.$route.params.id;
-      let element = {};
-
-      this.jobs?.data?.forEach((el) => {
-        if (el.attributes.slug === slug) element = el;
-      });
-
-      return element;
+    currentElement() {
+      return this.jobs?.data?.[0];
     },
 
     // VALIDATIONS
