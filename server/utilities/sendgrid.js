@@ -14,7 +14,7 @@ export default function sendContactEmail(fields) {
       {
         to: [
           {
-            email: "giancarlocroce@flashbeing.com",
+            email: "recruiting@csu-online.it",
           },
         ],
         // cc: [
