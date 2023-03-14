@@ -9,7 +9,7 @@ export default function sendContactEmail(fields) {
     return { error: "Required field(s) missing", success: false };
   }
   const msg = {
-    from: "alessiocrea@flashbeing.com", // Use the email address or domain you verified
+    from: "no-reply@flashbeing.com", // Use the email address or domain you verified
     personalizations: [
       {
         to: [
