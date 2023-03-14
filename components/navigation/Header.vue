@@ -57,8 +57,8 @@ header {
 
     & .lang-ct {
       & .language {
-        @apply inline-flex justify-center items-center text-primary uppercase mx-2 bg-secondary
-        cursor-pointer bg-opacity-40 h-10 w-10 rounded-full;
+        @apply inline-flex justify-center items-center text-primary font-semibold text-lg uppercase mx-2
+        cursor-pointer;
 
         &.current {
           @apply underline underline-offset-4;
