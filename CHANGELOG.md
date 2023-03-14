@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.3.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.3.0...v1.3.1) (2023-02-24)
+## [1.5.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.4.0...v1.5.0) (2023-03-14)
+
+
+### Features
+
+* add de translation ([24582d1](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/24582d1197438dd3f6fe6f99fa66736e6ca6aebe))
+
+## [1.4.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.3.0...v1.4.0) (2023-03-14)
+
+
+### Features
+
+* update language selection and error handling ([9d1fe14](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/9d1fe14e261f072426baac4eb65583ab08151e2f))
 
 
 ### Bug Fixes

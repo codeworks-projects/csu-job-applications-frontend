@@ -2,39 +2,47 @@
   <header>
     <div class="container center">
       <NuxtLink class="image-ct" :to="localePath('/')">
-        <img src="~public/image/csu-logo.png" alt="csu-logo" />
+        <img src="/image/csu-logo.png" alt="csu-logo" />
       </NuxtLink>
 
-      <!-- <div class="lang-ct">
+      <div class="lang-ct">
         <ul>
-          <NuxtLink
+          <div
             v-for="lang in locales"
-            :key="lang.code"
-            :to="switchLocalePath(lang.code)"
-            class="text-white cursor-pointer bg-primary m-5 text-lg inline-block"
+            :key="lang"
+            class="language"
+            :class="{
+              current: lang === currentLocale,
+            }"
+            @click="changeLanguage(lang)"
           >
-            {{ lang.code }}
-          </NuxtLink>
+            {{ lang }}
+          </div>
         </ul>
-      </div> -->
+      </div>
     </div>
   </header>
 </template>
 
-<script>
-export default {
-  setup() {
-    const localePath = useLocalePath();
-    const { locale, locales } = useI18n();
-    const switchLocalePath = useSwitchLocalePath();
+<script setup lang="ts">
+const localePath = useLocalePath();
+const i18n = useI18n();
+const route = useRoute();
 
-    return {
-      localePath,
-      locale,
-      locales,
-      switchLocalePath,
-    };
-  },
+const lastLocale = useCookie("lastLocale");
+
+const locales = ref(i18n.localeCodes.value);
+
+const currentLocale = computed(() => {
+  return i18n.locale.value;
+});
+
+const changeLanguage = (lang: string) => {
+  if (!route.params.id) {
+    lastLocale.value = lang;
+  }
+
+  i18n.setLocale(lang);
 };
 </script>
 
@@ -42,8 +50,20 @@ export default {
 header {
   @apply absolute top-24 left-6 right-6 z-10;
   & .container {
+    @apply flex items-center justify-between;
     & .image-ct {
       @apply inline-block w-96;
+    }
+
+    & .lang-ct {
+      & .language {
+        @apply inline-flex justify-center items-center text-primary font-semibold text-lg uppercase mx-2
+        cursor-pointer;
+
+        &.current {
+          @apply underline underline-offset-4;
+        }
+      }
     }
   }
 }

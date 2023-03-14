@@ -13,11 +13,11 @@
     <main ref="job-section" class="container center">
       <p class="open-positions">{{ $t("common.openPositions") }}</p>
       <div class="section-wrapper">
-        <nuxt-link
+        <NuxtLink
           class="section"
           v-for="(job, i) in getJobs"
           :key="i"
-          :to="localePath('/') + job.attributes.slug"
+          :to="localePath(`/${job.attributes.slug}`)"
         >
           <h1>
             {{ job.attributes.title }}
@@ -26,7 +26,7 @@
             <li>{{ job.attributes.place }}</li>
             <li>{{ job.attributes.hours }}</li>
           </ul>
-        </nuxt-link>
+        </NuxtLink>
       </div>
 
       <div v-if="!getJobs" class="section-wrapper placeholder">
@@ -80,8 +80,8 @@ export default defineNuxtComponent({
   },
 
   methods: {
-    goTo(refName) {
-      const element = this.$refs[refName];
+    goTo(refName:string) {
+      const element:any = this.$refs[refName];
       const top = element.offsetTop;
       window.scrollTo({
         top: top,
