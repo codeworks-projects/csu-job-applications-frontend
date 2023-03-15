@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.5.0...v1.5.1) (2023-03-15)
+
+
+### Bug Fixes
+
+* language selector mobile ([b30050a](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/b30050a1744da0abb3c2eb63e072732c408c30ad))
+
 ## [1.5.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.4.0...v1.5.0) (2023-03-14)
 
 
