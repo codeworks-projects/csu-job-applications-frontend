@@ -1,6 +1,5 @@
 <template>
     <div class="select" :class="{
-        'not-block': notBlock,
         disabled: disabled,
         'not-valid': !valid,
         fill: aspect === 'fill',
@@ -85,16 +84,6 @@ export default {
             selected,
         };
     },
-    // computed: {
-    //     selected: {
-    //         get() {
-    //             return this.value;
-    //         },
-    //         set(val) {
-    //             this.$emit("input", val);
-    //         },
-    //     },
-    // },
 };
 </script>
 
@@ -104,9 +93,6 @@ export default {
         @apply block text-sm font-medium text-black mb-1;
     }
 
-    &.not-block label {
-        @apply flex;
-    }
 
     & .selector {
         @apply inline-block bg-white px-5 text-base font-medium cursor-pointer;
