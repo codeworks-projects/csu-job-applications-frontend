@@ -80,8 +80,8 @@ export default defineNuxtComponent({
   },
 
   methods: {
-    goTo(refName:string) {
-      const element:any = this.$refs[refName];
+    goTo(refName: string) {
+      const element: any = this.$refs[refName];
       const top = element.offsetTop;
       window.scrollTo({
         top: top,
@@ -107,7 +107,7 @@ export default defineNuxtComponent({
       @apply relative top-1/2 left-0;
 
       & h1 {
-        @apply text-8xl font-light text-white;
+        @apply text-8xl text-white;
 
         line-height: 1.2;
       }
@@ -139,7 +139,7 @@ export default defineNuxtComponent({
         @apply block relative w-full mt-6 pt-2 pb-4 border-t-4 border-t-primary text-grey;
 
         & h1 {
-          @apply text-4xl pt-4 font-light;
+          @apply text-4xl pt-4 transition-all;
         }
         & .info-job {
           @apply mt-8 flex;

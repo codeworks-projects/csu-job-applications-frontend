@@ -31,6 +31,7 @@
       </div>
 
       <!-- Sections -->
+
       <div
         class="section"
         :class="isShowned.includes(i) ? 'active' : ''"
@@ -80,6 +81,35 @@ export default defineNuxtComponent({
       isShowned: [],
     };
   },
+
+  watch: {
+    jobData(newVal) {
+      if (!newVal?.attributes?.informations?.length) {
+        return;
+      }
+
+      for (
+        let index = 0;
+        index < newVal?.attributes?.informations?.length;
+        index++
+      ) {
+        this.isShowned.push(index);
+      }
+    },
+  },
+
+  mounted() {
+    if (this.jobData?.attributes?.informations) {
+      for (
+        let index = 0;
+        index < this.jobData?.attributes?.informations?.length;
+        index++
+      ) {
+        this.isShowned.push(index);
+      }
+    }
+  },
+
   methods: {
     toggleShow(id) {
       if (!this.isShowned.includes(id)) {
@@ -131,7 +161,7 @@ export default defineNuxtComponent({
       @apply relative w-full mt-6 border-t-4 border-t-primary text-grey;
 
       & h1 {
-        @apply text-4xl py-6 font-light;
+        @apply text-4xl py-6 transition-all;
 
         &:hover {
           @apply cursor-pointer;
@@ -139,11 +169,12 @@ export default defineNuxtComponent({
       }
 
       & .info-job {
-        @apply mt-2 w-2/3 flex;
+        @apply mt-2 w-2/3 flex whitespace-pre;
       }
 
       & .toggle {
-        @apply flex justify-center items-center absolute right-0 top-6 border-4 border-grey h-10 w-10;
+        @apply flex justify-center items-center transition-all
+        absolute right-0 top-6 border-4 border-grey h-10 w-10;
 
         border-radius: 50%;
 
