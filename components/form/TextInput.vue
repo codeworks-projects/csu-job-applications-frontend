@@ -20,24 +20,25 @@
       @input="updateValue(($event.target as HTMLInputElement).value)"
       @blur="onBlur(($event.target as HTMLInputElement).value)"
       /> -->
-      <input
-        ref="input"
-        :type="type"
-        :placeholder="placeholder"
-        :name="name"
-        v-model="inputModel"
-        :required="required"
-        :disabled="disabled"
-        @keypress="keypress($event)"
-        @input="updateValue(($event.target as HTMLInputElement).value)"
-        @blur="onBlur(($event.target as HTMLInputElement).value)"
-      />
+    <input
+      ref="input"
+      :type="type"
+      :placeholder="placeholder"
+      :name="name"
+      v-model="inputModel"
+      :required="required"
+      :disabled="disabled"
+      :accept="acceptedMimeTypes"
+      @keypress="keypress($event)"
+      @input="updateValue(($event.target as HTMLInputElement).value)"
+      @blur="onBlur(($event.target as HTMLInputElement).value)"
+    />
     <InputDescription v-if="description" :text="description" />
   </div>
 </template>
 
 <script lang="ts">
-import {computed} from "@vue/runtime-core";
+import { computed } from "@vue/runtime-core";
 export default defineNuxtComponent({
   props: {
     label: {
@@ -64,6 +65,7 @@ export default defineNuxtComponent({
             "email",
             "search",
             "password",
+            "file",
             "hidden",
           ] as String[]
         ).includes(value);
@@ -96,21 +98,25 @@ export default defineNuxtComponent({
       type: Boolean,
       default: true,
     },
+    acceptedMimeTypes: {
+      type: String,
+      default: "application/pdf",
+    },
     modelValue: String,
   },
 
-  setup(props,{emit}) {
+  setup(props, { emit }) {
     const inputModel = computed({
-      get(){
-        return props.modelValue
+      get() {
+        return props.modelValue;
       },
-      set(newValue){
-        emit('update:modelValue', newValue)
-      }
-    })
+      set(newValue) {
+        emit("update:modelValue", newValue);
+      },
+    });
     return {
       inputModel,
-    }
+    };
   },
 
   methods: {

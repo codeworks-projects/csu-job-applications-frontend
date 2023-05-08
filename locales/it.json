@@ -3,7 +3,7 @@
     "winterJobs": "Lavora con noi!",
     "info": "info",
     "csuEmail": "csu-online.it",
-    "csuAddress": "Via E. Ferrari, 5", 
+    "csuAddress": "Via E. Ferrari, 5",
     "capAndBz": "39100 Bolzano",
     "csuTelephone": "Tel +39 0471 324239",
     "pIva": "P.Iva 01588430213",
@@ -21,7 +21,8 @@
     "pleaseCompleteAllMandatoryFields": "Completa i campi obbligatori",
     "mandatoryFieldsDesc": "Perfavore completa tutti i campi obbligatori e accetta i Termini di servizio prima di procedere con 'Apply'.",
     "formSubmissionConfirmationTitle": "Grazie!",
-    "formSubmissionConfirmation": "Abbiamo ricevuto la tua candidatura e provvederemo a darti riscontro al più presto sulla tua email."
+    "formSubmissionConfirmation": "Abbiamo ricevuto la tua candidatura e provvederemo a darti riscontro al più presto sulla tua email.",
+    "uploadCV": "Carica il tuo CV (.pdf)"
   },
   "footer": {
     "didYouNotFindThePositionYouWereLookingFor": "Non hai trovato la posizione che cercavi?",
@@ -39,7 +40,7 @@
     "name": "Nome*",
     "surname": "Cognome*",
     "email": "Email*",
-    "birthday": "Data*",
+    "birthday": "Data di nascita*",
     "lastWorkingExperience": "Ultima esperienza lavorativa*",
     "message": "Messaggio",
     "gender": "Sesso*",

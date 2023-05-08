@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.5.2...v1.6.0) (2023-05-08)
+
+
+### Features
+
+* add attachment to email. Various GUI patches. ([3849451](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/3849451c06ea8a32fdb3ec72e5accf311cdc0c33))
+
 ### [1.5.2](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.5.1...v1.5.2) (2023-03-20)
 
 

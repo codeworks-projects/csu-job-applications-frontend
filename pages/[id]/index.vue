@@ -14,6 +14,7 @@
           <!-- Name -->
           <TextInput
             v-model="validations.name"
+            :disabled="isSendingForm"
             :valid="isNameValid"
             type="text"
             class="input"
@@ -24,6 +25,7 @@
           <!-- Surname -->
           <TextInput
             v-model="validations.surname"
+            :disabled="isSendingForm"
             :valid="isSurnameValid"
             type="text"
             class="input"
@@ -35,6 +37,7 @@
           <div class="double-input-ct">
             <TextInput
               v-model="validations.email"
+              :disabled="isSendingForm"
               :valid="isEmailValid"
               type="email"
               class="input first-input"
@@ -44,6 +47,7 @@
             />
             <DateInput
               v-model="validations.birthday"
+              :disabled="isSendingForm"
               type="data"
               class="input"
               aspect="fill"
@@ -55,6 +59,7 @@
           <div class="double-input-ct">
             <TextInput
               v-model="validations.phone"
+              :disabled="isSendingForm"
               :valid="isPhoneValid"
               type="text"
               class="input first-input"
@@ -64,6 +69,7 @@
             />
             <Select
               v-model="validations.gender"
+              :disabled="isSendingForm"
               :disabled-option="$t('placeholder.gender')"
               :options="genders"
               class="input"
@@ -73,6 +79,7 @@
           <!-- Formation -->
           <TextInput
             v-model="validations.studyTitle"
+            :disabled="isSendingForm"
             :valid="isStudyTitleValid"
             type="text"
             class="input"
@@ -83,6 +90,7 @@
           <!-- Language -->
           <TextInput
             v-model="validations.languages"
+            :disabled="isSendingForm"
             :valid="isLanguagesValid"
             type="text"
             class="input"
@@ -93,6 +101,7 @@
           <!-- Profession -->
           <TextInput
             v-model="validations.lastWorkingExperience"
+            :disabled="isSendingForm"
             :valid="isLastWorkingExperienceValid"
             type="text"
             class="input col-span-2"
@@ -103,15 +112,31 @@
           <!-- Message -->
           <TextArea
             v-model="validations.message"
+            :disabled="isSendingForm"
             type="text"
             class="input"
             aspect="fill"
             :placeholder="$t('placeholder.message')"
           />
 
+          <InputLabel :text="$t('jobs.uploadCV')" required class="mt-2" />
+
+          <!-- NOTE: it should be set after changing error handling on other inputs. They should also have error state after send email click (if needed). -->
+          <!-- :valid="isCurriculumFileValid" -->
+          <TextInput
+            v-model="validations.curriculumFile"
+            :disabled="isSendingForm"
+            ref="fileInput"
+            type="file"
+            class="input no-margin"
+            aspect="fill"
+            required
+          />
+
           <div class="checkbox-ct">
             <Checkbox
               v-model="isPrivacyCheck"
+              :disabled="isSendingForm"
               :checked="isPrivacyCheck === true"
               required
             />
@@ -127,7 +152,12 @@
             </p>
           </div>
           <div class="btn-ct" @click="finalCheck()" type="submit">
-            <Button value="Apply" icon="arrow-up-right" type="primary" />
+            <Button
+              value="Apply"
+              icon="arrow-up-right"
+              type="primary"
+              :loading="isSendingForm"
+            />
           </div>
         </div>
       </div>
@@ -165,6 +195,7 @@ export default defineNuxtComponent({
       isSuccessModalVisible: false,
 
       // VALIDATIONS
+
       validations: {
         name: "",
         surname: "",
@@ -176,8 +207,14 @@ export default defineNuxtComponent({
         languages: "",
         lastWorkingExperience: "",
         message: "",
+        curriculumFile: undefined,
       },
+
       isPrivacyCheck: false,
+
+      isCurriculumFileValid: true,
+
+      isSendingForm: false,
 
       genders: [
         this.$t("placeholder.man"),
@@ -310,6 +347,7 @@ export default defineNuxtComponent({
         this.validations.lastWorkingExperience === ""
       );
     },
+
     isFormValid() {
       return (
         !this.validations?.name ||
@@ -321,6 +359,7 @@ export default defineNuxtComponent({
         !this.validations?.studyTitle ||
         !this.validations?.languages ||
         !this.validations?.lastWorkingExperience ||
+        !this.validations?.curriculumFile ||
         // !this.validations?.message ||
         !this.isPrivacyCheck ||
         !this.isNameValid ||
@@ -347,8 +386,28 @@ export default defineNuxtComponent({
       this.isSuccessModalVisible = !this.isSuccessModalVisible;
     },
 
-    sendEmail() {
-      useFetch("/api/email", {
+    getFormattedNameForFile(value: any) {
+      return value.toLowerCase().replace(/ /g, "-");
+    },
+
+    getBase64File(file: any): any {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    },
+
+    async sendEmail() {
+      const refInput = this.$refs.fileInput as any;
+      const file = refInput.$el.children[0].files[0];
+      const filename = `${this.getFormattedNameForFile(
+        this.validations.name
+      )}_${this.getFormattedNameForFile(this.validations.surname)}_CV.pdf`;
+      const attachmentContent = await this.getBase64File(file);
+
+      await useFetch("/api/email", {
         method: "POST",
         body: {
           name: this.validations.name,
@@ -361,13 +420,24 @@ export default defineNuxtComponent({
           lastWorkingExperience: this.validations.lastWorkingExperience,
           languages: this.validations.languages,
           message: this.validations.message,
+          jobOffer: this.currentElement.attributes?.title,
+          attachment: {
+            content: attachmentContent.replace(
+              "data:application/pdf;base64,",
+              ""
+            ),
+            filename,
+          },
         },
       });
     },
 
-    finalCheck() {
-      if (!this.isFormValid) {
-        this.sendEmail();
+    async finalCheck() {
+      if (!this.isFormValid && this.validations.curriculumFile) {
+        this.isSendingForm = true;
+
+        await this.sendEmail();
+
         this.toggleSuccessModal();
 
         this.validations.name = "";
@@ -380,8 +450,14 @@ export default defineNuxtComponent({
         this.validations.languages = "";
         this.validations.lastWorkingExperience = "";
         this.validations.message = "";
+        this.validations.curriculumFile = undefined;
+
         this.isPrivacyCheck = false;
+        this.isCurriculumFileValid = true;
+
+        this.isSendingForm = false;
       } else {
+        this.isCurriculumFileValid = false;
         this.toggleErrorModal();
       }
     },
@@ -412,6 +488,10 @@ export default defineNuxtComponent({
           @apply mt-2 w-full bg-white border-grey;
 
           border: 1px solid rgb(179 179 179);
+
+          &.no-margin {
+            @apply mt-0;
+          }
         }
 
         & .double-input-ct {
@@ -431,7 +511,7 @@ export default defineNuxtComponent({
         }
 
         & .checkbox-ct {
-          @apply p-3 flex items-center;
+          @apply p-3 flex items-start;
 
           & .checkbox-info {
             @apply inline text-center;

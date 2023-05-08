@@ -8,6 +8,10 @@ export default function sendContactEmail(fields) {
   if (!check) {
     return { error: "Required field(s) missing", success: false };
   }
+  const attachment = fields.attachment;
+
+  delete fields.attachment;
+
   const msg = {
     from: "no-reply@flashbeing.com", // Use the email address or domain you verified
     personalizations: [
@@ -33,7 +37,15 @@ export default function sendContactEmail(fields) {
           lastWorkingExperience: fields.lastWorkingExperience,
           languages: fields.languages,
           message: fields.message,
+          jobOffer: fields.jobOffer,
         },
+      },
+    ],
+    attachments: [
+      {
+        ...attachment,
+        type: "application/pdf",
+        disposition: "attachment",
       },
     ],
     template_id: "d-7ad65aa263de4744b2e96139364eae57",

@@ -3,7 +3,7 @@
     "winterJobs": "Mit uns arbeiten",
     "info": "info",
     "csuEmail": "csu-online.it",
-    "csuAddress": "E. Ferrari Str. 5", 
+    "csuAddress": "E. Ferrari Str. 5",
     "capAndBz": "39100 Bozen",
     "csuTelephone": "Tel +39 0471 324239",
     "pIva": "MwSt-Nr. 01588430213",
@@ -21,7 +21,8 @@
     "pleaseCompleteAllMandatoryFields": "Bitte füllen Sie die mit * gekennzeichneten Felder aus.",
     "mandatoryFieldsDesc": "Bitte füllen Sie die mit * gekennzeichneten Felder aus.'.",
     "formSubmissionConfirmationTitle": "Danke!",
-    "formSubmissionConfirmation": "Wir haben deine Bewerbung bekommen. Wir werden dich sobald als möglich kontaktieren"
+    "formSubmissionConfirmation": "Wir haben deine Bewerbung bekommen. Wir werden dich sobald als möglich kontaktieren",
+    "uploadCV": "Laden Sie Ihren Lebenslauf hoch (.pdf)"
   },
 
   "footer": {
@@ -40,7 +41,7 @@
     "name": "Name*",
     "surname": "Nachname*",
     "email": "Email*",
-    "birthday": "Datum*",
+    "birthday": "Geburtsdatum*",
     "lastWorkingExperience": "Letzte Berufserfahrung*",
     "message": "Nachricht",
     "gender": "Geschlecht*",
