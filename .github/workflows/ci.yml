@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify CI Start
+        if: ${{ contains(github.ref, 'main') || contains(github.ref, 'master') }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -64,14 +65,6 @@ jobs:
           repo-mappings: |
             github.com/codeworks-infrastructure/nixos-config-naru
             github.com/codeworks-infrastructure/nixos-config-yosai
-      
-      - name: Checkout Naru repository
-        if: ${{ contains(github.ref, 'development') || contains(github.ref, 'release') }}
-        uses: actions/checkout@v3
-        with:
-          path: naru
-          repository: codeworks-infrastructure/nixos-config-naru
-          ref: main
 
       - name: Checkout Yosai repository
         if: ${{ contains(github.ref, 'main') || contains(github.ref, 'master') }}
@@ -90,17 +83,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
-      - name: Deploy Stage
-        if: ${{ contains(github.ref, 'development') || contains(github.ref, 'release') }}
-        run: |
-          cd naru
-          git config user.email "ci@codeworks.build"
-          git config user.name "Codeworks CI"
-          python ops/change-commit.py -b ${{ github.ref_name }} -s csu -r csu-job-applications-frontend -c ${{ github.sha }}
-          git add services/csu.nix
-          git commit -m '${{ github.ref_name }} - ${{github.repository}}'
-          git push origin main
       
       - name: Deploy Production
         if: ${{ contains(github.ref, 'main') || contains(github.ref, 'master') }}
