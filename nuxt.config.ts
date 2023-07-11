@@ -24,6 +24,11 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
         },
       ],
+      script: [
+        {
+          src: "/js/facebook-pixel.js",
+        },
+      ],
       noscript: [{ children: "Javascript is required" }],
     },
   },

@@ -440,6 +440,10 @@ export default defineNuxtComponent({
 
         this.toggleSuccessModal();
 
+        if(window.fbq) {
+            window.fbq('trackCustom', 'submittedForm');
+        }
+
         this.validations.name = "";
         this.validations.surname = "";
         this.validations.email = "";
