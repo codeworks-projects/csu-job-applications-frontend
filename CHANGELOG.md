@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.7.0 (2023-07-12)
+
+
+### Features
+
+* added Facebook Pixel tracking ([a6a6844](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/a6a6844010992b98df33739bb235876d1b473995))
+
+
+### Bug Fixes
+
+* new logo and footer text fix ([48538f8](https://github.com/codeworks-projects/csu-job-applications-frontend/commit/48538f893e679b51c487115a79ae8e80f4db42a1))
+
 ### [1.6.1](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.6.0...v1.6.1) (2023-06-21)
 
 ## [1.6.0](https://github.com/codeworks-projects/csu-job-applications-frontend/compare/v1.5.2...v1.6.0) (2023-05-08)
