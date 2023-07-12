@@ -9,7 +9,8 @@
     "release": "standard-version",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test:ci": "echo no test"
+    "test:ci": "echo no test",
+    "release-production": "chmod 700 ./script/release-production.sh && ./script/release-production.sh"
   },
   "devDependencies": {
     "@nuxt/image-edge": "^1.0.0-27827328.bc9ddc0",
