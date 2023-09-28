@@ -227,7 +227,7 @@ export default defineNuxtComponent({
   async setup() {
     const { public: configPublic } = useRuntimeConfig();
     const localePath = useLocalePath();
-    const { locale } = useI18n();
+    const { locale, t } = useI18n();
     const route = useRoute();
     const router = useRouter();
 
@@ -291,6 +291,19 @@ export default defineNuxtComponent({
         jobApplicationLocalizationsAvailable ??
         jobApplicationLocalizations.value;
     }
+
+    const pageInfo = jobsFetch.value?.data?.data?.[0]?.attributes;
+
+    // Page meta
+    useHead({
+      title: pageInfo?.title,
+      meta: [
+        {
+          name: "description",
+          content: `${pageInfo?.title} - ${pageInfo?.place}`,
+        },
+      ],
+    });
 
     return {
       jobs: jobsFetch.value?.data,

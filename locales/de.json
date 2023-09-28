@@ -1,4 +1,10 @@
 {
+  "pg": {
+    "home": {
+      "title": "CSU Jobs Portal",
+      "description": "Mit uns arbeiten! Sende uns Deine Initiativbewerbung."
+    }
+  },
   "common": {
     "winterJobs": "Mit uns arbeiten",
     "info": "info",
