@@ -1,4 +1,10 @@
 {
+  "pg": {
+    "home": {
+      "title": "CSU Jobs Portal",
+      "description": "Lavora con noi! Siamo sempre aperti a nuove candidature."
+    }
+  },
   "common": {
     "winterJobs": "Lavora con noi!",
     "info": "info",

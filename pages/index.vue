@@ -53,7 +53,18 @@ export default defineNuxtComponent({
   async setup() {
     const localePath = useLocalePath();
     const { public: configPublic } = useRuntimeConfig();
-    const { locale } = useI18n();
+    const { locale, t } = useI18n();
+
+    // Page meta
+    useHead({
+      title: t("pg.home.title"),
+      meta: [
+        {
+          name: "description",
+          content: `${t("pg.home.description")}`,
+        },
+      ],
+    });
 
     const { data: jobs } = await useLazyFetch(
       configPublic.apiBase +
