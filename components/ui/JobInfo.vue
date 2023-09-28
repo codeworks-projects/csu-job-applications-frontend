@@ -163,13 +163,15 @@ export default defineNuxtComponent({
       & h1 {
         @apply text-4xl py-6 transition-all;
 
+        width: 90%;
+
         &:hover {
           @apply cursor-pointer;
         }
       }
 
       & .info-job {
-        @apply mt-2 w-2/3 flex whitespace-pre;
+        @apply mt-2 w-2/3 flex whitespace-pre-line;
       }
 
       & .toggle {
@@ -243,6 +245,12 @@ export default defineNuxtComponent({
       & .section {
         & h1 {
           @apply text-3xl;
+
+          width: 85%;
+        }
+
+        & .info-job {
+          @apply w-full;
         }
       }
     }
